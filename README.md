@@ -25,3 +25,6 @@ pipenv install  # Install requirements in pipfile
 
 python manage.py runserver  # once everything has been set up, start the django server to see the app running on http://127.0.0.1:8000/
 ```
+
+If you recieve a warning about unapplied migrations, run;
+`python manage.py makemigrations` and `python manage.py migrate`
