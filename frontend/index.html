@@ -1,13 +1,28 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>deck.gl Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+<script type="module">
+  import { renderToDOM } from './src/app.jsx';
+  renderToDOM(document.getElementById('app'));
+</script>
+
 </html>
