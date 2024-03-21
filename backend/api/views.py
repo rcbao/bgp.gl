@@ -14,7 +14,7 @@ def internal_server_error():
 class USDataView(APIView):
     """The API view for the entire US data"""
 
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         try:
             # Build the initial prompt using OpeningPromptBuilder
             map_data = MapDataConnector().get_us_data()
