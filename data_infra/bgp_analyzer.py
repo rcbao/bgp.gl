@@ -20,7 +20,7 @@ class BGPAnalyzer:
             sys.stdout.write(json.dumps([entry.data], indent=2)[2:-2])
             sys.stdout.write(", \n")
             i += 1
-            if i > 200:
+            if i > 10:
                 break
         sys.stdout.write("]\n\n")
 

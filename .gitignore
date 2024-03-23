@@ -152,3 +152,5 @@ cython_debug/
 #.idea/
 
 rib.*
+.DS_Store
+data_infra/data/out.json
