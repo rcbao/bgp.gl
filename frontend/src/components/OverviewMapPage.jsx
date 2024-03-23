@@ -72,7 +72,7 @@ function getTooltip({ object }) {
     ${count} Accidents`;
 }
 
-function StateMapComponent({
+function OverviewMapComponent({
     data,
     mapStyle = MAP_STYLE,
     radius = 1000,
@@ -120,15 +120,17 @@ function StateMapComponent({
     );
 }
 
-const StateMapView = () => {
+const OverviewMapPage = () => {
     return (
         <div className="columns-2 flex flex-row">
-            <StateMapComponent data={[]} />
+            <OverviewMapComponent data={[]} />
             <div style={{ width: "40vw" }} className="p-6">
-                <h1 className="text-4xl font-bold px-4">State view</h1>
+                <h1 className="text-3xl font-bold px-4">
+                    United States BGP Traffic Data
+                </h1>
             </div>
         </div>
     );
 };
 
-export default StateMapView;
+export default OverviewMapPage;

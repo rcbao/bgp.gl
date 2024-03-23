@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import StateMapView from "./components/StateMap";
+import OverviewMapPage from "./components/OverviewMapPage";
 import Header from "./components/Header";
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
             <BrowserRouter>
                 <Header />
                 <Routes>
-                    <Route path={`/`} element={<StateMapView />} />
+                    <Route path={`/`} element={<OverviewMapPage />} />
                 </Routes>
             </BrowserRouter>
         </div>
