@@ -124,10 +124,47 @@ const OverviewMapPage = () => {
     return (
         <div className="columns-2 flex flex-row">
             <OverviewMapComponent data={[]} />
-            <div style={{ width: "40vw" }} className="p-6">
-                <h1 className="text-3xl font-bold px-4">
+            <div style={{ width: "40vw" }} className="p-8">
+                <h1 className="text-3xl font-bold">
                     United States BGP Traffic Overview
                 </h1>
+                <div className="my-6">
+                    <h2 className="text-xl font-bold my-4">
+                        High-level Overview
+                    </h2>
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="dashboard-widget-card ">
+                            <h5 className="dashboard-widget-card-header">
+                                # Announcements
+                            </h5>
+                            <h3 className="dashboard-widget-card-data">
+                                {128000}
+                            </h3>
+                        </div>
+                        <div className="dashboard-widget-card">
+                            <h5 className="dashboard-widget-card-header">
+                                Most Advertised Prefix
+                            </h5>
+                            <h3 className="dashboard-widget-card-data">
+                                127.0.0.1
+                            </h3>
+                        </div>
+                        <div className="dashboard-widget-card">
+                            <h5 className="dashboard-widget-card-header">
+                                Org with Most Routes
+                            </h5>
+                            <h3 className="dashboard-widget-card-data">
+                                Google Inc.
+                            </h3>
+                        </div>
+                        <div className="dashboard-widget-card">
+                            <h5 className="dashboard-widget-card-header">
+                                Most Advertised Prefix Length
+                            </h5>
+                            <h3 className="dashboard-widget-card-data">12</h3>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
