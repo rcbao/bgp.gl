@@ -126,7 +126,7 @@ const OverviewMapPage = () => {
             <OverviewMapComponent data={[]} />
             <div style={{ width: "40vw" }} className="p-6">
                 <h1 className="text-3xl font-bold px-4">
-                    United States BGP Traffic Data
+                    United States BGP Traffic Overview
                 </h1>
             </div>
         </div>
