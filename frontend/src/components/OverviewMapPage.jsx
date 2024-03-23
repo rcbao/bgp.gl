@@ -124,9 +124,9 @@ const OverviewMapPage = () => {
     return (
         <div className="columns-2 flex flex-row">
             <OverviewMapComponent data={[]} />
-            <div style={{ width: "40vw" }} className="p-8">
+            <div style={{ width: "40vw" }} className="p-10">
                 <h1 className="text-3xl font-bold">
-                    United States BGP Traffic Overview
+                    United States BGP Traffic Map
                 </h1>
                 <div className="my-6">
                     <h2 className="text-xl font-bold my-4">
@@ -135,7 +135,7 @@ const OverviewMapPage = () => {
                     <div className="grid grid-cols-2 gap-4">
                         <div className="dashboard-widget-card ">
                             <h5 className="dashboard-widget-card-header">
-                                # Announcements
+                                BGP Announcements
                             </h5>
                             <h3 className="dashboard-widget-card-data">
                                 {128000}
