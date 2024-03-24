@@ -37,10 +37,10 @@ const material = {
 };
 
 const INITIAL_VIEW_STATE = {
-    longitude: -1.415727,
-    latitude: 52.232395,
-    zoom: 6.6,
-    minZoom: 5,
+    longitude: -78.507980,
+    latitude: 38.033554,
+    zoom: 6,
+    minZoom: 4,
     maxZoom: 15,
     pitch: 40.5,
     bearing: -27,
