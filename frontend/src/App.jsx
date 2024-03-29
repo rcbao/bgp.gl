@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import OverviewMapPage from "./components/OverviewMapPage";
+import State from "./components/State";
 import Header from "./components/Header";
 
 export default function App() {
@@ -11,9 +12,10 @@ export default function App() {
             style={{ height: "100vh" }}
         >
             <BrowserRouter>
-                <Header />
+                <Header/>
                 <Routes>
                     <Route path={`/`} element={<OverviewMapPage />} />
+                    <Route path="state" element={<State />} />
                 </Routes>
             </BrowserRouter>
         </div>

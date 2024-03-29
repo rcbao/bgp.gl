@@ -5,7 +5,6 @@ import { AmbientLight, PointLight, LightingEffect } from "@deck.gl/core";
 import { HexagonLayer } from "@deck.gl/aggregation-layers";
 import DeckGL from "@deck.gl/react";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { Link } from "react-router-dom";
 
 const ambientLight = new AmbientLight({
     color: [255, 255, 255],
@@ -73,7 +72,7 @@ function getTooltip({ object }) {
     ${count} Accidents`;
 }
 
-function OverviewMapComponent({
+function StateSpecificComponent({
     data,
     mapStyle = MAP_STYLE,
     radius = 1000,
@@ -110,30 +109,28 @@ function OverviewMapComponent({
                 controller={true}
                 getTooltip={getTooltip}
             >
-                <Link to={`/state`}>
-                    <Map
-                        reuseMaps
-                        mapLib={maplibregl}
-                        mapStyle={mapStyle}
-                        preventStyleDiffing={true}
-                    />
-                </Link>
+                <Map
+                    reuseMaps
+                    mapLib={maplibregl}
+                    mapStyle={mapStyle}
+                    preventStyleDiffing={true}
+                />
             </DeckGL>
         </div>
     );
 }
 
-const OverviewMapPage = () => {
+const StateSpecific = () => {
     return (
         <div className="columns-2 flex flex-row">
-            <OverviewMapComponent data={[]} />
+            <StateSpecificComponent data={[]} />
             <div style={{ width: "40vw" }} className="p-10">
                 <h1 className="text-3xl font-bold" style={{ color: "black" }}>
-                    United States BGP Traffic Map
+                    [state] BGP Traffic Map
                 </h1>
                 <div className="my-6">
                     <h2 className="text-xl font-bold my-4" style={{ color: "black" }}>
-                        High-level Overview
+                        State-level Overview
                     </h2>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="dashboard-widget-card ">
@@ -141,7 +138,7 @@ const OverviewMapPage = () => {
                                 BGP Announcements
                             </h5>
                             <h3 className="dashboard-widget-card-data">
-                                {128000}
+                                {3}
                             </h3>
                         </div>
                         <div className="dashboard-widget-card">
@@ -157,7 +154,7 @@ const OverviewMapPage = () => {
                                 Org with Most Routes
                             </h5>
                             <h3 className="dashboard-widget-card-data">
-                                Google Inc.
+                                state Inc.
                             </h3>
                         </div>
                         <div className="dashboard-widget-card">
@@ -173,4 +170,4 @@ const OverviewMapPage = () => {
     );
 };
 
-export default OverviewMapPage;
+export default StateSpecific;
