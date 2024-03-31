@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# parse BGP to a tabular format
+# Usage: ./bgp_parser.sh <input_file_path>
+
 input_file_path="$1"
 
 input_dir=$(dirname "$input_file_path")
