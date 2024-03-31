@@ -1,32 +1,5 @@
 import json
-import requests
-import pandas as pd
-import reverse_geocoder as rg
-
-# Function to fetch location data using CAIDA API
-def get_coordinates(asn):
-    url = f"https://api.asrank.caida.org/v2/restful/asns/{asn}"
-    response = requests.get(url)
-    if response.status_code == 200:
-        data = response.json()
-        longitude = data['data']['asn']['longitude']
-        long = round(longitude, 3)
-        latitude = data['data']['asn']['latitude']
-        lat = round(latitude, 3)
-        return lat, long 
-    else:
-        return None, None
-
-# Use reverse_geocoder to get state based off of lat / long
-def get_state_name(latitude, longitude):
-    coordinates = (latitude, longitude)
-    result = rg.search(coordinates)
-    
-    if result:
-        state = result[0]['admin1'] # admin1 is state name
-        return state
-    else:
-        return None
+import geocoder # Needs pip install geocoder --user
 
 # Function to process the rib.txt file
 def process_rib_file(rib_file_path):
@@ -41,15 +14,14 @@ def process_rib_file(rib_file_path):
             line = line.strip()
             line_info = line.split("|")
 
-            prefix = line_info[5]
-            peer_asn = line_info[4] 
-            if len(line_info) >= 7:
-                path = line_info[6]
-                path = path.split(" ")
-                asn = path[len(path) - 1]
-            else: 
-                asn = ''
+            physical_router_address = line_info[5]
 
+            # Get location
+            location = geocoder.ip(physical_router_address)
+            if location.country == "US":
+                lat_long_arr = location.latlng
+                state = location.state
+            
     return us_json, states_json
 
 # Main function to run the script
