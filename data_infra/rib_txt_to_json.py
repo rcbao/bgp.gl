@@ -15,6 +15,7 @@ def process_rib_file(rib_file_path):
             line_info = line.split("|")
 
             physical_router_address = line_info[5]
+            physical_router_address = physical_router_address.split("/")[0]
 
             # Get location
             location = geocoder.ip(physical_router_address)
