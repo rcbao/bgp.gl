@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 import OverviewMapPage from "./components/OverviewMapPage";
 import State from "./components/State";
 import Header from "./components/Header";
@@ -15,7 +15,8 @@ export default function App() {
                 <Header/>
                 <Routes>
                     <Route path={`/`} element={<OverviewMapPage />} />
-                    <Route path="state" element={<State />} />
+                    {/* <Route path="/state/:state" element={<State />} /> */}
+                    <Route path="/state" element={<State />} />
                 </Routes>
             </BrowserRouter>
         </div>
