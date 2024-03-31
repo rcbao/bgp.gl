@@ -12,7 +12,7 @@ then
 fi
 
 # Convert the RIB file to a more readable format
-bgpdump -O $output_file $input_file
+bgpdump -mO $output_file $input_file
 
 # Notify the user
 echo "Conversion completed. The output is saved to $output_file."
