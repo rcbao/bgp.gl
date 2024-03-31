@@ -3,6 +3,7 @@
 # parse BGP to a tabular format
 # Usage: ./bgp_parser.sh <input_file_path>
 
+# input file: a RIB file in MRT format (e.g., rib.20240321.2000)
 input_file_path="$1"
 
 input_dir=$(dirname "$input_file_path")
