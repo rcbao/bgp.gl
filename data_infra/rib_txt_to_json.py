@@ -14,8 +14,13 @@ def process_rib_file(rib_file_path):
             line = line.strip()
             line_info = line.split("|")
 
-            physical_router_address = line_info[5]
-            physical_router_address = physical_router_address.split("/")[0]
+            physical_router = line_info[5]
+            physical_router_arr = physical_router.split("/")
+            physical_router_address = physical_router_arr[0]
+            if len(physical_router_arr) >= 2:
+                pr_prefix_length = physical_router_arr[1]
+            else: 
+                pr_prefix_length = 0
 
             # Get location
             location = geocoder.ip(physical_router_address)
