@@ -1,35 +1,21 @@
 import ipaddress
-import csv
+import sqlite3
 
 
-def load_ranges_from_csv(file_path):
-    ranges = []
-    with open(file_path, "r") as file:
-        reader = csv.reader(file)
-        for row in reader:
-            start_ip, end_ip = int(row[0]), int(row[1])
-            ranges.append((start_ip, end_ip))
-    return ranges
+class IPGeocoder:
+    def __init__(self, db_file):
+        self.conn = sqlite3.connect(db_file)
+        self.cursor = self.conn.cursor()
 
+    def lookup_ip_coordinates(self, ip_str):
+        ip_int = int(ipaddress.ip_address(ip_str))
+        self.cursor.execute(
+            """SELECT latitude, longitude FROM ip_ranges
+               WHERE start_ip <= ? AND end_ip >= ?""",
+            (ip_int, ip_int),
+        )
+        result = self.cursor.fetchone()
+        return result  # Returns a tuple (latitude, longitude) or None
 
-def ip_in_range(ip_str, file_path):
-    ip_int = int(ipaddress.ip_address(ip_str))
-    ranges = load_ranges_from_csv(file_path)
-
-    # Binary search, assuming ranges are sorted by the start address
-    left, right = 0, len(ranges) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        if ranges[mid][0] <= ip_int <= ranges[mid][1]:
-            return True
-        elif ip_int < ranges[mid][0]:
-            right = mid - 1
-        else:
-            left = mid + 1
-    return False
-
-
-# Example usage
-file_path = "geolite2-city-ipv4-num-US-only.csv"
-ip = "1.2.3.4"  # IP to check
-print(ip_in_range(ip, file_path))
+    def close(self):
+        self.conn.close()

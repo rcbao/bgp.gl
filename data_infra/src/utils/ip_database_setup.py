@@ -1,6 +1,8 @@
 import csv
 import sqlite3
 
+from constants import IP_DATABASE_CSV, IP_DATABASE_FILE
+
 
 def create_and_populate_db(csv_file, db_file):
     conn = sqlite3.connect(db_file)
@@ -25,3 +27,7 @@ def create_and_populate_db(csv_file, db_file):
 
     conn.commit()
     conn.close()
+
+
+if __name__ == "__main__":
+    create_and_populate_db(IP_DATABASE_CSV, IP_DATABASE_FILE)
