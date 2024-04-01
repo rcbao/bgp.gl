@@ -1,5 +1,7 @@
 from .ip_geocoder import IPGeocoder
 
+MOCKING = False
+
 
 def get_physical_router_addr(rib_line: str) -> tuple[str, int]:
     elements = rib_line.split("|")
@@ -19,20 +21,24 @@ class USDataAggregator:
         pass
 
     def get_overview_results(self):
-        return {
-            "numberOfAnnouncements": 128000,
-            "mostAdvertisedIpPrefixes": "127.0.0.1",
-            "asWithMostRoutes": "Google Inc.",
-            "mostCommonPrefixLength": 12,
-        }
+
+        if MOCKING:
+            return {
+                "numberOfAnnouncements": 128000,
+                "mostAdvertisedIpPrefixes": "127.0.0.1",
+                "asWithMostRoutes": "Google Inc.",
+                "mostCommonPrefixLength": 12,
+            }
 
     def get_prefix_length_distribution(self):
+        # TODO: Implement this method
         return [
             {"length": 12, "count": 1280},
             {"length": 18, "count": 1490},
         ]
 
     def get_us_heatmap_data(self):
+        # TODO: Implement this method
         return {"AL": 1200, "AK": 800, "AZ": 1800}
 
     def get_results(self):

@@ -1,5 +1,6 @@
 import json
 import sys
+import pandas as pd
 from utils.us_data_aggregator import USDataAggregator
 
 
@@ -9,9 +10,25 @@ def save_json(filename, data):
 
 
 # Main function to run the script
-def main(rib_file_path):
+def main(bgp_dump_file):
+    use_columns = [1, 4, 5, 6]
+    column_names = ["timestamp", "neighboring_AS", "prefix", "AS_path"]
 
-    us_aggregator = USDataAggregator()
+    df = pd.read_csv(
+        bgp_dump_file,
+        sep="|",
+        header=None,
+        usecols=use_columns,
+        names=column_names,
+    )
+
+    # Format timestamp and AS_path columns
+    df["timestamp"] = pd.to_datetime(df["timestamp"], unit="s")
+    df["AS_path"] = df["AS_path"].astype(str)
+
+    print(df.head())
+
+    us_aggregator = USDataAggregator(df)
     us_json = us_aggregator.get_results()
 
     # Write the JSON data to a file
