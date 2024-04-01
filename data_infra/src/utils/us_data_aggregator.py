@@ -1,5 +1,4 @@
 from .ip_geocoder import IPGeocoder
-from .constants import IP_DATABASE_FILE
 
 
 def get_physical_router_addr(rib_line: str) -> tuple[str, int]:
