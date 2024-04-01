@@ -9,8 +9,14 @@
 # 3. Analyze the tabular data to get the final data for the dashboard using rib_txt_to_json.py
 # 4. Save output to the output directory
 
+## constants ##
+## ========= ##
+
 bgp_file_url="http://archive.routeviews.org/bgpdata/2024.03/RIBS/rib.20240321.2000.bz2"
 output_dir="data"
+
+## ========= ##
+
 
 # the BGP path derived from the URL. (Example: data/rib.20240321.2000)
 bgp_filepath=$output_dir/$(echo $bgp_file_url | awk -F'/' '{print $NF}' | sed 's/\.bz2$//')

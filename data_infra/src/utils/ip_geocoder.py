@@ -14,8 +14,10 @@ class IPGeocoder:
                WHERE start_ip <= ? AND end_ip >= ?""",
             (ip_int, ip_int),
         )
+
+        # Returns a tuple (latitude, longitude) or None
         result = self.cursor.fetchone()
-        return result  # Returns a tuple (latitude, longitude) or None
+        return result
 
     def close(self):
         self.conn.close()

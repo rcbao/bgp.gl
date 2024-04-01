@@ -1,30 +1,24 @@
-import sys
 import json
-from mrtparse import Reader
+from utils.us_data_aggregator import USDataAggregator
 
 
-class BGPAnalyzer:
-    """
-    This class is used to analyze BGP messages from a given file.
-    Steps to analye BGP messages:
-    (1) Filter
-    """
+def save_json(filename, data):
+    with open(filename, "w") as json_file:
+        json.dump(data, json_file, indent=4)
 
-    def __init__(self, file_path):
-        self.file_path = file_path
 
-    def get_bgp_messages(self):
-        i = 0
-        sys.stdout.write("[\n")
-        for entry in Reader(self.file_path):
-            sys.stdout.write(json.dumps([entry.data], indent=2)[2:-2])
-            sys.stdout.write(", \n")
-            i += 1
-            if i > 10:
-                break
-        sys.stdout.write("]\n\n")
+# Main function to run the script
+def main():
+    rib_file_path = "data/rib.20240321.2000.tail.size.500.txt"
+    us_aggregator = USDataAggregator()
+
+    us_json = us_aggregator.get_results()
+
+    # Write the JSON data to a file
+    save_json("../us.json", us_json)
+
+    print("Conversion completed. JSON data saved.")
 
 
 if __name__ == "__main__":
-    file_path = "data/rib.20240321.2000"
-    BGPAnalyzer(file_path).get_bgp_messages()
+    main()
