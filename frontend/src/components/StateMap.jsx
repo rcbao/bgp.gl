@@ -14,7 +14,7 @@ const getStateViewState = (stateName) => {
     const ViewState = {
         longitude: center.longitude,
         latitude: center.latitude,
-        zoom: 5,
+        zoom: 5.5,
         minZoom: 4,
         maxZoom: 15,
         pitch: 40.5,
