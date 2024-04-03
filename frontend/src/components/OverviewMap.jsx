@@ -1,17 +1,14 @@
 import { Map } from "react-map-gl";
 import maplibregl from "maplibre-gl";
-import { HexagonLayer } from "@deck.gl/aggregation-layers";
 import DeckGL from "@deck.gl/react";
 import { GeoJsonLayer } from "@deck.gl/layers";
 import usStatesGeoJson from "./us-states.json";
-import { lightingEffect, material, MAP_STYLE, colorRange } from "./constants";
-
-const overviewViewState = {
-    longitude: -97,
-    latitude: 40,
-    zoom: 3.3,
-    maxZoom: 10,
-};
+import {
+    lightingEffect,
+    mapComponentStyle,
+    overviewViewState,
+    MAP_STYLE,
+} from "./constants";
 
 const getTooltip = ({ object }) => {
     if (!object) {
@@ -23,14 +20,7 @@ const getTooltip = ({ object }) => {
     return `${stateName} (${stateAbbr.toUpperCase()})`;
 };
 
-const OverviewMap = ({
-    data,
-    navigate,
-    mapStyle = MAP_STYLE,
-    radius = 1000,
-    upperPercentile = 100,
-    coverage = 1,
-}) => {
+const OverviewMap = ({ data, navigate, mapStyle = MAP_STYLE }) => {
     const geoJsonLayer = new GeoJsonLayer({
         id: "geojson-layer",
         data: usStatesGeoJson,
@@ -39,7 +29,7 @@ const OverviewMap = ({
         lineWidthMinPixels: 2,
         getFillColor: [160, 160, 180, 50],
         getLineColor: [0, 0, 0, 255],
-        pickable: true, // Enable picking
+        pickable: true,
         onClick: ({ object, x, y }) => {
             if (object) {
                 const stateAbbr = object.properties.abbreviation;
@@ -48,28 +38,9 @@ const OverviewMap = ({
         },
     });
 
-    const hexagonLayer = new HexagonLayer({
-        id: "heatmap",
-        colorRange,
-        coverage,
-        data,
-        elevationRange: [0, 3000],
-        elevationScale: data && data.length ? 50 : 0,
-        extruded: true,
-        getPosition: (d) => d,
-        pickable: true,
-        radius,
-        upperPercentile,
-        material,
-
-        transitions: {
-            elevationScale: 3000,
-        },
-    });
-
-    const layers = [geoJsonLayer, hexagonLayer];
+    const layers = [geoJsonLayer];
     return (
-        <div style={{ height: "100vh", width: "60vw", position: "relative" }}>
+        <div style={mapComponentStyle}>
             <DeckGL
                 layers={layers}
                 effects={[lightingEffect]}
