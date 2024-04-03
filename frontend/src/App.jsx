@@ -15,7 +15,7 @@ export default function App() {
                 <Header />
                 <Routes>
                     <Route path={`/`} element={<OverviewMapPage />} />
-                    <Route path="/state/:state" element={<StateMapPage />} />
+                    <Route path="/:state" element={<StateMapPage />} />
                 </Routes>
             </BrowserRouter>
         </div>
