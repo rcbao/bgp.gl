@@ -9,7 +9,7 @@ const StateMapPage = () => {
 
     return (
         <div className="columns-2 flex flex-row">
-            <StateMap data={[]} />
+            <StateMap data={[]} stateName={state} />
             <div style={{ width: "40vw" }} className="p-10">
                 <h1 className="text-3xl font-bold" style={{ color: "black" }}>
                     {state} BGP Traffic

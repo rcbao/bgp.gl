@@ -3,15 +3,24 @@ import maplibregl from "maplibre-gl";
 import { HexagonLayer } from "@deck.gl/aggregation-layers";
 import DeckGL from "@deck.gl/react";
 import { lightingEffect, material, MAP_STYLE, colorRange } from "./constants";
+import usStatesGeoJson from "./us-states.json";
 
-const stateViewState = {
-    longitude: -78.50798,
-    latitude: 38.033554,
-    zoom: 6,
-    minZoom: 4,
-    maxZoom: 15,
-    pitch: 40.5,
-    bearing: -27,
+const getStateViewState = (stateName) => {
+    console.log("stateName: ", stateName);
+    const features = usStatesGeoJson.features;
+    const stateObj = features.find((f) => f.properties.name === stateName);
+    const center = stateObj.properties.center;
+
+    const ViewState = {
+        longitude: center.longitude,
+        latitude: center.latitude,
+        zoom: 5,
+        minZoom: 4,
+        maxZoom: 15,
+        pitch: 40.5,
+        bearing: -27,
+    };
+    return ViewState;
 };
 
 function getTooltip({ object }) {
@@ -30,6 +39,7 @@ function getTooltip({ object }) {
 
 const StateMap = ({
     data,
+    stateName,
     mapStyle = MAP_STYLE,
     radius = 1000,
     upperPercentile = 100,
@@ -56,23 +66,29 @@ const StateMap = ({
         }),
     ];
 
+    const stateViewState = getStateViewState(stateName);
+
     return (
-        <div style={{ height: "100vh", width: "60vw", position: "relative" }}>
-            <DeckGL
-                layers={layers}
-                effects={[lightingEffect]}
-                initialViewState={stateViewState}
-                controller={true}
-                getTooltip={getTooltip}
+        stateViewState && (
+            <div
+                style={{ height: "100vh", width: "60vw", position: "relative" }}
             >
-                <Map
-                    reuseMaps
-                    mapLib={maplibregl}
-                    mapStyle={mapStyle}
-                    preventStyleDiffing={true}
-                />
-            </DeckGL>
-        </div>
+                <DeckGL
+                    layers={layers}
+                    effects={[lightingEffect]}
+                    initialViewState={stateViewState}
+                    controller={true}
+                    getTooltip={getTooltip}
+                >
+                    <Map
+                        reuseMaps
+                        mapLib={maplibregl}
+                        mapStyle={mapStyle}
+                        preventStyleDiffing={true}
+                    />
+                </DeckGL>
+            </div>
+        )
     );
 };
 
