@@ -1,7 +1,7 @@
 import React from "react";
-import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import OverviewMapPage from "./components/OverviewMapPage";
-import State from "./components/State";
+import StateMapPage from "./components/StateMapPage";
 import Header from "./components/Header";
 
 export default function App() {
@@ -12,11 +12,10 @@ export default function App() {
             style={{ height: "100vh" }}
         >
             <BrowserRouter>
-                <Header/>
+                <Header />
                 <Routes>
                     <Route path={`/`} element={<OverviewMapPage />} />
-                    {/* <Route path="/state/:state" element={<State />} /> */}
-                    <Route path="/state" element={<State />} />
+                    <Route path="/state/:state" element={<StateMapPage />} />
                 </Routes>
             </BrowserRouter>
         </div>

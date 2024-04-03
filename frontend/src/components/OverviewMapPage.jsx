@@ -1,6 +1,7 @@
 import React from "react";
 import { Map } from "react-map-gl";
 import maplibregl from "maplibre-gl";
+import { useNavigate } from "react-router-dom";
 import { AmbientLight, PointLight, LightingEffect } from "@deck.gl/core";
 import { HexagonLayer } from "@deck.gl/aggregation-layers";
 import DeckGL from "@deck.gl/react";
@@ -69,6 +70,7 @@ function getTooltip({ object }) {
 
 function OverviewMapComponent({
     data,
+    navigate,
     mapStyle = MAP_STYLE,
     radius = 1000,
     upperPercentile = 100,
@@ -88,6 +90,7 @@ function OverviewMapComponent({
             if (object) {
                 const stateName = object.properties.name; // Assuming 'name' contains the state name
                 console.log(`hi from ${stateName}`);
+                navigate(`/state/${stateName}`);
             }
         },
     });
@@ -133,9 +136,11 @@ function OverviewMapComponent({
 }
 
 const OverviewMapPage = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="columns-2 flex flex-row">
-            <OverviewMapComponent data={[]} />
+            <OverviewMapComponent navigate={navigate} data={[]} />
             <div style={{ width: "40vw" }} className="p-10">
                 <h1 className="text-3xl font-bold">
                     United States BGP Traffic Map

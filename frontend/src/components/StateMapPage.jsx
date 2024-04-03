@@ -1,6 +1,8 @@
 import React from "react";
 import { Map } from "react-map-gl";
 import maplibregl from "maplibre-gl";
+import { useParams } from "react-router-dom";
+
 import { AmbientLight, PointLight, LightingEffect } from "@deck.gl/core";
 import { HexagonLayer } from "@deck.gl/aggregation-layers";
 import DeckGL from "@deck.gl/react";
@@ -37,7 +39,7 @@ const material = {
 };
 
 const INITIAL_VIEW_STATE = {
-    longitude: -78.507980,
+    longitude: -78.50798,
     latitude: 38.033554,
     zoom: 6,
     minZoom: 4,
@@ -79,7 +81,7 @@ function StateSpecificComponent({
     upperPercentile = 100,
     coverage = 1,
 }) {
-        const layers = [
+    const layers = [
         new HexagonLayer({
             id: "heatmap",
             colorRange,
@@ -120,16 +122,22 @@ function StateSpecificComponent({
     );
 }
 
-const StateSpecific = () => {
+const StateMapPage = () => {
+    let { state } = useParams();
+    console.log(state);
+
     return (
         <div className="columns-2 flex flex-row">
             <StateSpecificComponent data={[]} />
             <div style={{ width: "40vw" }} className="p-10">
                 <h1 className="text-3xl font-bold" style={{ color: "black" }}>
-                    [state] BGP Traffic Map
+                    {state} BGP Traffic
                 </h1>
                 <div className="my-6">
-                    <h2 className="text-xl font-bold my-4" style={{ color: "black" }}>
+                    <h2
+                        className="text-xl font-bold my-4"
+                        style={{ color: "black" }}
+                    >
                         State-level Overview
                     </h2>
                     <div className="grid grid-cols-2 gap-4">
@@ -137,9 +145,7 @@ const StateSpecific = () => {
                             <h5 className="dashboard-widget-card-header">
                                 BGP Announcements
                             </h5>
-                            <h3 className="dashboard-widget-card-data">
-                                {3}
-                            </h3>
+                            <h3 className="dashboard-widget-card-data">{3}</h3>
                         </div>
                         <div className="dashboard-widget-card">
                             <h5 className="dashboard-widget-card-header">
@@ -170,4 +176,4 @@ const StateSpecific = () => {
     );
 };
 
-export default StateSpecific;
+export default StateMapPage;
