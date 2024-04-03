@@ -2,62 +2,19 @@ import React from "react";
 import { Map } from "react-map-gl";
 import maplibregl from "maplibre-gl";
 import { useNavigate } from "react-router-dom";
-import { AmbientLight, PointLight, LightingEffect } from "@deck.gl/core";
 import { HexagonLayer } from "@deck.gl/aggregation-layers";
 import DeckGL from "@deck.gl/react";
 import { GeoJsonLayer } from "@deck.gl/layers";
 import "maplibre-gl/dist/maplibre-gl.css";
-
 import usStatesGeoJson from "./us-states.json";
-
-const ambientLight = new AmbientLight({
-    color: [255, 255, 255],
-    intensity: 1.0,
-});
-
-const pointLight1 = new PointLight({
-    color: [255, 255, 255],
-    intensity: 0.8,
-    position: [-0.144528, 49.739968, 80000],
-});
-
-const pointLight2 = new PointLight({
-    color: [255, 255, 255],
-    intensity: 0.8,
-    position: [-3.807751, 54.104682, 8000],
-});
-
-const lightingEffect = new LightingEffect({
-    ambientLight,
-    pointLight1,
-    pointLight2,
-});
-
-const material = {
-    ambient: 0.64,
-    diffuse: 0.6,
-    shininess: 32,
-    specularColor: [51, 51, 51],
-};
+import { lightingEffect, material, MAP_STYLE, colorRange } from "./constants";
 
 const INITIAL_VIEW_STATE = {
-    longitude: -100,
+    longitude: -97,
     latitude: 40,
-    zoom: 3,
+    zoom: 3.3,
     maxZoom: 10,
 };
-
-const MAP_STYLE =
-    "https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
-
-export const colorRange = [
-    [1, 152, 189],
-    [73, 227, 206],
-    [216, 254, 181],
-    [254, 237, 177],
-    [254, 173, 84],
-    [209, 55, 78],
-];
 
 function getTooltip({ object }) {
     if (!object) {
