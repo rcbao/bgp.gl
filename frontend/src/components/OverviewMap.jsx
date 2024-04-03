@@ -1,6 +1,5 @@
 import { GeoJsonLayer } from "@deck.gl/layers";
 import usStatesGeoJson from "./us-states.json";
-import { overviewViewState } from "./constants";
 import DeckGLMap from "./DeckGLMap";
 
 const getTooltip = ({ object }) => {
@@ -11,6 +10,13 @@ const getTooltip = ({ object }) => {
     const stateAbbr = object.properties.abbreviation;
 
     return `${stateName} (${stateAbbr.toUpperCase()})`;
+};
+
+export const overviewViewState = {
+    longitude: -97,
+    latitude: 40,
+    zoom: 3.3,
+    maxZoom: 10,
 };
 
 const OverviewMap = ({ data, navigate }) => {

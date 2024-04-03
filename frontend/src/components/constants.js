@@ -42,13 +42,6 @@ export const colorRange = [
     [209, 55, 78],
 ];
 
-export const overviewViewState = {
-    longitude: -97,
-    latitude: 40,
-    zoom: 3.3,
-    maxZoom: 10,
-};
-
 export const mapComponentStyle = {
     height: "100vh",
     width: "60vw",
