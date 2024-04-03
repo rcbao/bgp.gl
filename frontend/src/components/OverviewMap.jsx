@@ -18,8 +18,9 @@ const getTooltip = ({ object }) => {
         return null;
     }
     const stateName = object.properties.name;
+    const stateAbbr = object.properties.abbreviation;
 
-    return `${stateName}`;
+    return `${stateName} (${stateAbbr.toUpperCase()})`;
 };
 
 const OverviewMap = ({
@@ -41,8 +42,8 @@ const OverviewMap = ({
         pickable: true, // Enable picking
         onClick: ({ object, x, y }) => {
             if (object) {
-                const stateName = object.properties.name;
-                navigate(`/${stateName}`);
+                const stateAbbr = object.properties.abbreviation;
+                navigate(`/${stateAbbr}`);
             }
         },
     });

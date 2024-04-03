@@ -5,10 +5,12 @@ import DeckGL from "@deck.gl/react";
 import { lightingEffect, material, MAP_STYLE, colorRange } from "./constants";
 import usStatesGeoJson from "./us-states.json";
 
-const getStateViewState = (stateName) => {
-    console.log("stateName: ", stateName);
+const getStateViewState = (stateAbbr) => {
+    console.log("state abbreviation: ", stateAbbr);
     const features = usStatesGeoJson.features;
-    const stateObj = features.find((f) => f.properties.name === stateName);
+    const stateObj = features.find(
+        (f) => f.properties.abbreviation === stateAbbr
+    );
     const center = stateObj.properties.center;
 
     const ViewState = {
@@ -23,7 +25,7 @@ const getStateViewState = (stateName) => {
     return ViewState;
 };
 
-function getTooltip({ object }) {
+const getTooltip = ({ object }) => {
     if (!object) {
         return null;
     }
@@ -35,7 +37,7 @@ function getTooltip({ object }) {
     latitude: ${Number.isFinite(lat) ? lat.toFixed(6) : ""}
     longitude: ${Number.isFinite(lng) ? lng.toFixed(6) : ""}
     ${count} Accidents`;
-}
+};
 
 const StateMap = ({
     data,
