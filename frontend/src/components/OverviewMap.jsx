@@ -1,14 +1,7 @@
-import { Map } from "react-map-gl";
-import maplibregl from "maplibre-gl";
-import DeckGL from "@deck.gl/react";
 import { GeoJsonLayer } from "@deck.gl/layers";
 import usStatesGeoJson from "./us-states.json";
-import {
-    lightingEffect,
-    mapComponentStyle,
-    overviewViewState,
-    MAP_STYLE,
-} from "./constants";
+import { overviewViewState } from "./constants";
+import DeckGLMap from "./DeckGLMap";
 
 const getTooltip = ({ object }) => {
     if (!object) {
@@ -20,7 +13,7 @@ const getTooltip = ({ object }) => {
     return `${stateName} (${stateAbbr.toUpperCase()})`;
 };
 
-const OverviewMap = ({ data, navigate, mapStyle = MAP_STYLE }) => {
+const OverviewMap = ({ data, navigate }) => {
     const geoJsonLayer = new GeoJsonLayer({
         id: "geojson-layer",
         data: usStatesGeoJson,
@@ -40,22 +33,11 @@ const OverviewMap = ({ data, navigate, mapStyle = MAP_STYLE }) => {
 
     const layers = [geoJsonLayer];
     return (
-        <div style={mapComponentStyle}>
-            <DeckGL
-                layers={layers}
-                effects={[lightingEffect]}
-                initialViewState={overviewViewState}
-                controller={true}
-                getTooltip={getTooltip}
-            >
-                <Map
-                    reuseMaps
-                    mapLib={maplibregl}
-                    mapStyle={mapStyle}
-                    preventStyleDiffing={true}
-                />
-            </DeckGL>
-        </div>
+        <DeckGLMap
+            layers={layers}
+            viewState={overviewViewState}
+            getTooltip={getTooltip}
+        />
     );
 };
 export default OverviewMap;

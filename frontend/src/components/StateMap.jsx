@@ -1,9 +1,7 @@
-import { Map } from "react-map-gl";
-import maplibregl from "maplibre-gl";
 import { HexagonLayer } from "@deck.gl/aggregation-layers";
-import DeckGL from "@deck.gl/react";
-import { lightingEffect, material, MAP_STYLE, colorRange } from "./constants";
+import { material, colorRange } from "./constants";
 import usStatesGeoJson from "./us-states.json";
+import DeckGLMap from "./DeckGLMap";
 
 const getStateViewState = (stateAbbr) => {
     console.log("state abbreviation: ", stateAbbr);
@@ -13,7 +11,7 @@ const getStateViewState = (stateAbbr) => {
     );
     const center = stateObj.properties.center;
 
-    const ViewState = {
+    const viewState = {
         longitude: center.longitude,
         latitude: center.latitude,
         zoom: 5.5,
@@ -22,7 +20,7 @@ const getStateViewState = (stateAbbr) => {
         pitch: 40.5,
         bearing: -27,
     };
-    return ViewState;
+    return viewState;
 };
 
 const getTooltip = ({ object }) => {
@@ -42,7 +40,6 @@ const getTooltip = ({ object }) => {
 const StateMap = ({
     data,
     stateName,
-    mapStyle = MAP_STYLE,
     radius = 1000,
     upperPercentile = 100,
     coverage = 1,
@@ -72,24 +69,11 @@ const StateMap = ({
 
     return (
         stateViewState && (
-            <div
-                style={{ height: "100vh", width: "60vw", position: "relative" }}
-            >
-                <DeckGL
-                    layers={layers}
-                    effects={[lightingEffect]}
-                    initialViewState={stateViewState}
-                    controller={true}
-                    getTooltip={getTooltip}
-                >
-                    <Map
-                        reuseMaps
-                        mapLib={maplibregl}
-                        mapStyle={mapStyle}
-                        preventStyleDiffing={true}
-                    />
-                </DeckGL>
-            </div>
+            <DeckGLMap
+                layers={layers}
+                viewState={stateViewState}
+                getTooltip={getTooltip}
+            />
         )
     );
 };
