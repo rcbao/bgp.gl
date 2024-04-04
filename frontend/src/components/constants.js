@@ -47,3 +47,8 @@ export const mapComponentStyle = {
     width: "60vw",
     position: "relative",
 };
+
+export const fillColors = {
+    default: [131, 142, 177, 80],
+    highlight: [131, 142, 177, 160],
+};

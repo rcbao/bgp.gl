@@ -1,6 +1,7 @@
 import { GeoJsonLayer } from "@deck.gl/layers";
 import usStatesGeoJson from "./us-states.json";
 import DeckGLMap from "./DeckGLMap";
+import { fillColors } from "./constants";
 
 const getTooltip = ({ object }) => {
     if (!object) {
@@ -26,8 +27,10 @@ const OverviewMap = ({ data, navigate }) => {
         stroked: true,
         filled: true,
         lineWidthMinPixels: 2,
-        getFillColor: [160, 160, 180, 50],
+        getFillColor: fillColors.default,
         getLineColor: [0, 0, 0, 255],
+        autoHighlight: true,
+        highlightColor: fillColors.highlight,
         pickable: true,
         onClick: ({ object, x, y }) => {
             if (object) {

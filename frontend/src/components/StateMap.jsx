@@ -1,5 +1,6 @@
 import { HexagonLayer } from "@deck.gl/aggregation-layers";
-import { material, colorRange } from "./constants";
+import { GeoJsonLayer } from "@deck.gl/layers";
+import { material, colorRange, fillColors } from "./constants";
 import usStatesGeoJson from "./us-states.json";
 import DeckGLMap from "./DeckGLMap";
 
@@ -20,7 +21,7 @@ const getStateViewState = (stateAbbr) => {
         pitch: 40.5,
         bearing: -27,
     };
-    return viewState;
+    return [stateObj.id, viewState];
 };
 
 const getTooltip = ({ object }) => {
@@ -44,6 +45,8 @@ const StateMap = ({
     upperPercentile = 100,
     coverage = 1,
 }) => {
+    const [selectedStateId, stateViewState] = getStateViewState(stateName);
+
     const layers = [
         new HexagonLayer({
             id: "heatmap",
@@ -58,21 +61,30 @@ const StateMap = ({
             radius,
             upperPercentile,
             material,
-
             transitions: {
                 elevationScale: 3000,
             },
         }),
+        new GeoJsonLayer({
+            id: "geojson-layer",
+            data: usStatesGeoJson,
+            stroked: true,
+            filled: true,
+            lineWidthMinPixels: 2,
+            getFillColor: (d) =>
+                d.id === selectedStateId
+                    ? fillColors.highlight
+                    : fillColors.default,
+            getLineColor: [0, 0, 0, 255],
+        }),
     ];
-
-    const stateViewState = getStateViewState(stateName);
 
     return (
         stateViewState && (
             <DeckGLMap
                 layers={layers}
                 viewState={stateViewState}
-                getTooltip={getTooltip}
+                // getTooltip={getTooltip}
             />
         )
     );
