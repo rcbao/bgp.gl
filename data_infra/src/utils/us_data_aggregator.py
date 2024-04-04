@@ -1,3 +1,5 @@
+import pandas as pd
+import numpy as np
 from .ip_geocoder import IPGeocoder
 
 MOCKING = False
@@ -17,8 +19,9 @@ def get_physical_router_addr(rib_line: str) -> tuple[str, int]:
 
 
 class USDataAggregator:
-    def __init__(self) -> None:
-        pass
+    def __init__(self, rib_dataframe) -> None:
+        self.rib_df = rib_dataframe
+        self.geocoder = IPGeocoder()
 
     def get_overview_results(self):
 
@@ -38,13 +41,23 @@ class USDataAggregator:
         ]
 
     def get_us_heatmap_data(self):
-        # TODO: Implement this method
-        return {"AL": 1200, "AK": 800, "AZ": 1800}
+        def apply_lookup(row):
+            lat, long, state = self.geocoder.lookup_ip_coordinates(row["prefix"])
+            return pd.Series([lat, long, state])
+
+        self.rib_df[["latitude", "longitude", "state"]] = self.rib_df.apply(
+            apply_lookup, axis=1
+        )
+        value_counts = self.rib_df["state"].value_counts()
+        print("Value counts for US states")
+        print(value_counts)
 
     def get_results(self):
         overview = self.get_overview_results()
         prefix_length_distribution = self.get_prefix_length_distribution()
         us_announcement_heatmap = self.get_us_heatmap_data()
+
+        self.geocoder.close()
 
         return {
             "overview": overview,

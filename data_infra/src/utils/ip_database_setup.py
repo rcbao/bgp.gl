@@ -28,8 +28,9 @@ def create_and_populate_db(csv_file, db_file):
                 # Round latitude and longitude to 3 decimal places
                 lat, lon = round(float(row[7]), 4), round(float(row[8]), 4)
                 state1 = row[3]
-                if (state1, lat, lon) not in seen:
-                    seen.add((state1, lat, lon))
+                start, end = int(row[0]), int(row[1])
+                if (start, end, state1, lat, lon) not in seen:
+                    seen.add((start, end, state1, lat, lon))
                     row[7], row[8] = lat, lon
                     c.execute(
                         "INSERT INTO ip_ranges VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",

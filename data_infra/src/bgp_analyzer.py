@@ -24,7 +24,10 @@ def main(bgp_dump_file):
 
     # Format timestamp and AS_path columns
     df["timestamp"] = pd.to_datetime(df["timestamp"], unit="s")
+    df[["prefix", "prefix_length"]] = df["prefix"].str.split("/", expand=True)
+
     df["AS_path"] = df["AS_path"].astype(str)
+    df["prefix_length"] = df["prefix_length"].astype(int)
 
     print(df.head())
 
