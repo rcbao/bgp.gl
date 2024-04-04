@@ -42,10 +42,12 @@ class USDataAggregator:
         return {"AL": 1200, "AK": 800, "AZ": 1800}
 
     def get_results(self):
-        res = {}
+        overview = self.get_overview_results()
+        prefix_length_distribution = self.get_prefix_length_distribution()
+        us_announcement_heatmap = self.get_us_heatmap_data()
 
-        res["overview"] = self.get_overview_results()
-        res["prefixLengthDistribution"] = self.get_prefix_length_distribution()
-        res["usAnnouncementHeatMap"] = self.get_us_heatmap_data()
-
-        return res
+        return {
+            "overview": overview,
+            "prefixLengthDistribution": prefix_length_distribution,
+            "usAnnouncementHeatMap": us_announcement_heatmap,
+        }
