@@ -26,12 +26,11 @@ def geolocate_ip_df(df):
         lat, long, state = geocoder.lookup_ip_coordinates(row["prefix"])
         return pd.Series([lat, long, state])
 
-    output_cols = ["latitude", "longitude", "state"]
+    output_columns = ["latitude", "longitude", "state"]
 
-    df[output_cols] = df.apply(lookup_func, axis=1)
+    df[output_columns] = df.apply(lookup_func, axis=1)
+    filtered_df = df.dropna(subset=output_columns)
 
-    filtered_df = df.dropna(subset=["latitude", "longitude", "state"])
-    print(filtered_df.head())
     geocoder.close()
     return filtered_df
 

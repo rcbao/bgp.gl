@@ -14,10 +14,10 @@
 #SBATCH -o gen.us-bgp.data.analysis.slurm.job.%j.out
 #SBATCH -e gen.us-bgp.data.analysis.slurm.job.%j.err
 
-#SBATCH --partition=bii
+#SBATCH --partition=<PARTITION NAME>
 
 ### Account.
-#SBATCH -A nsf-crisp-2019
+#SBATCH -A <ACCOUNT NAME>
 
 ## . /etc/profile.d/modules.sh
 ## Rivanna.

@@ -7,34 +7,49 @@ MOCKING = False
 class USDataAggregator:
     def __init__(self, rib_dataframe) -> None:
         self.df = rib_dataframe
+        print(self.df.head())
 
     def get_overview_results(self):
+        num_announcements = len(self.df)
+        most_advertised_prefixes = self.df["prefix"].mode().iloc[0]
+        as_with_most_routes = self.df["neighboring_AS"].mode().iloc[0]
+        most_common_prefix_length = self.df["prefix_length"].mode().iloc[0]
 
-        if MOCKING:
-            return {
-                "numberOfAnnouncements": 128000,
-                "mostAdvertisedIpPrefixes": "127.0.0.1",
-                "asWithMostRoutes": "Google Inc.",
-                "mostCommonPrefixLength": 12,
-            }
+        metrics = {
+            "numberOfAnnouncements": num_announcements,
+            "mostAdvertisedIpPrefixes": most_advertised_prefixes,
+            "asWithMostRoutes": as_with_most_routes,
+            "mostCommonPrefixLength": most_common_prefix_length,
+        }
+        return metrics
 
     def get_prefix_length_distribution(self):
-        # TODO: Implement this method
-        return [
-            {"length": 12, "count": 1280},
-            {"length": 18, "count": 1490},
-        ]
+        distribution = self.df.groupby("prefix_length").size().reset_index(name="count")
 
-    def get_us_heatmap_data(self):
+        format_func = lambda row: {
+            "length": row.prefix_length,
+            "count": row["count"],
+        }
+
+        distribution_list = [format_func(row) for _, row in distribution.iterrows()]
+        return distribution_list
+
+    def get_state_heatmap_data(self):
+        """Get heatmap data for each individual state.
+
+        Sample output:
+        {
+            'California': [{'long': -118.0871, 'lat': 34.0899, 'count': 27}],
+            'Nebraska': [{'long': -96.1494, 'lat': 41.2854, 'count': 28}]
+        }
+        """
         agg_columns = ["state", "latitude", "longitude"]
         aggregated = self.df.groupby(agg_columns).size().reset_index(name="count")
 
-        # Transform the aggregated data into the desired JSON structure
-        result = defaultdict(lambda: {"stateAnnouncementHeatMap": []})
+        result = defaultdict(list)
 
-        # Create the JSON structure without iterrows()
         for state, new_df in aggregated.groupby("state"):
-            result[state]["stateAnnouncementHeatMap"] = [
+            result[state] = [
                 {"long": row.longitude, "lat": row.latitude, "count": int(row.count)}
                 for row in new_df.itertuples()
             ]
@@ -46,7 +61,7 @@ class USDataAggregator:
     def get_results(self):
         overview = self.get_overview_results()
         prefix_length_distribution = self.get_prefix_length_distribution()
-        us_announcement_heatmap = self.get_us_heatmap_data()
+        us_announcement_heatmap = self.get_state_heatmap_data()
 
         return {
             "overview": overview,
