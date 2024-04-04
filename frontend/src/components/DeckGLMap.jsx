@@ -5,7 +5,7 @@ import {
     lightingEffect,
     mapComponentStyle,
     MAP_STYLE as mapStyle,
-} from "./constants";
+} from "./utils/constants";
 
 const DeckGLMap = ({ layers, viewState, getTooltip }) => {
     return (

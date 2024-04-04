@@ -1,7 +1,7 @@
 import { GeoJsonLayer } from "@deck.gl/layers";
 import usStatesGeoJson from "./us-states.json";
 import DeckGLMap from "./DeckGLMap";
-import { fillColors } from "./constants";
+import { fillColors } from "./utils/constants";
 
 const getTooltip = ({ object }) => {
     if (!object) {

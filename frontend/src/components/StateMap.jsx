@@ -1,21 +1,18 @@
 import { HexagonLayer } from "@deck.gl/aggregation-layers";
 import { GeoJsonLayer } from "@deck.gl/layers";
-import { material, colorRange, fillColors } from "./constants";
+import { material, colorRange, fillColors } from "./utils/constants";
+import { findStateByAbbreviation } from "./utils/utils";
 import usStatesGeoJson from "./us-states.json";
 import DeckGLMap from "./DeckGLMap";
 
 const getStateViewState = (stateAbbr) => {
-    console.log("state abbreviation: ", stateAbbr);
-    const features = usStatesGeoJson.features;
-    const stateObj = features.find(
-        (f) => f.properties.abbreviation === stateAbbr
-    );
+    const stateObj = findStateByAbbreviation(stateAbbr);
     const center = stateObj.properties.center;
 
     const viewState = {
         longitude: center.longitude,
         latitude: center.latitude,
-        zoom: 5.5,
+        zoom: 6,
         minZoom: 4,
         maxZoom: 15,
         pitch: 40.5,
@@ -73,8 +70,8 @@ const StateMap = ({
             lineWidthMinPixels: 2,
             getFillColor: (d) =>
                 d.id === selectedStateId
-                    ? fillColors.highlight
-                    : fillColors.default,
+                    ? fillColors.highlightDark
+                    : fillColors.defaultDark,
             getLineColor: [0, 0, 0, 255],
         }),
     ];

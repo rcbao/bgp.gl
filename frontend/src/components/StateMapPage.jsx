@@ -2,17 +2,18 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import "maplibre-gl/dist/maplibre-gl.css";
 import StateMap from "./StateMap";
+import { findStateByAbbreviation } from "./utils/utils";
 
 const StateMapPage = () => {
-    let { state } = useParams();
-    console.log(state);
+    const { state: stateAbbr } = useParams();
+    const stateName = findStateByAbbreviation(stateAbbr).properties.name;
 
     return (
         <div className="columns-2 flex flex-row">
-            <StateMap data={[]} stateName={state} />
+            <StateMap data={[]} stateName={stateAbbr} />
             <div style={{ width: "40vw" }} className="p-10">
                 <h1 className="text-3xl font-bold" style={{ color: "black" }}>
-                    {state} BGP Traffic
+                    {stateName} BGP Traffic
                 </h1>
                 <div className="my-6">
                     <h2

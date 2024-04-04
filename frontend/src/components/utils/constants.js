@@ -51,4 +51,6 @@ export const mapComponentStyle = {
 export const fillColors = {
     default: [131, 142, 177, 80],
     highlight: [131, 142, 177, 160],
+    defaultDark: [131, 142, 177, 25],
+    highlightDark: [131, 142, 177, 100],
 };
