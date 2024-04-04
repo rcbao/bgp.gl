@@ -20,7 +20,6 @@ class IPGeocoder:
         result = self.cursor.fetchone()
         if not result:
             return (None, None, None)
-        print(result)
         return result
 
     def close(self):

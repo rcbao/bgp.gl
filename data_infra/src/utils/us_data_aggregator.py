@@ -1,27 +1,12 @@
 import pandas as pd
-import numpy as np
-from .ip_geocoder import IPGeocoder
+from collections import defaultdict
 
 MOCKING = False
 
 
-def get_physical_router_addr(rib_line: str) -> tuple[str, int]:
-    elements = rib_line.split("|")
-    router_info = elements[5]
-
-    addr_contains_prefix = "/" in router_info
-
-    if addr_contains_prefix:
-        (address, prefix_length) = router_info.split("/")
-        res = (address, int(prefix_length))
-        return res
-    return (elements[5], None)
-
-
 class USDataAggregator:
     def __init__(self, rib_dataframe) -> None:
-        self.rib_df = rib_dataframe
-        self.geocoder = IPGeocoder()
+        self.df = rib_dataframe
 
     def get_overview_results(self):
 
@@ -41,23 +26,27 @@ class USDataAggregator:
         ]
 
     def get_us_heatmap_data(self):
-        def apply_lookup(row):
-            lat, long, state = self.geocoder.lookup_ip_coordinates(row["prefix"])
-            return pd.Series([lat, long, state])
+        agg_columns = ["state", "latitude", "longitude"]
+        aggregated = self.df.groupby(agg_columns).size().reset_index(name="count")
 
-        self.rib_df[["latitude", "longitude", "state"]] = self.rib_df.apply(
-            apply_lookup, axis=1
-        )
-        value_counts = self.rib_df["state"].value_counts()
-        print("Value counts for US states")
-        print(value_counts)
+        # Transform the aggregated data into the desired JSON structure
+        result = defaultdict(lambda: {"stateAnnouncementHeatMap": []})
+
+        # Create the JSON structure without iterrows()
+        for state, new_df in aggregated.groupby("state"):
+            result[state]["stateAnnouncementHeatMap"] = [
+                {"long": row.longitude, "lat": row.latitude, "count": int(row.count)}
+                for row in new_df.itertuples()
+            ]
+
+        result = dict(result)
+        print(result)
+        return result
 
     def get_results(self):
         overview = self.get_overview_results()
         prefix_length_distribution = self.get_prefix_length_distribution()
         us_announcement_heatmap = self.get_us_heatmap_data()
-
-        self.geocoder.close()
 
         return {
             "overview": overview,

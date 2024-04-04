@@ -2,11 +2,38 @@ import json
 import sys
 import pandas as pd
 from utils.us_data_aggregator import USDataAggregator
+from utils.ip_geocoder import IPGeocoder
 
 
 def save_json(filename, data):
     with open(filename, "w") as json_file:
         json.dump(data, json_file, indent=4)
+
+
+def format_df(df):
+    # Format timestamp and AS_path columns
+    df["timestamp"] = pd.to_datetime(df["timestamp"], unit="s")
+    df[["prefix", "prefix_length"]] = df["prefix"].str.split("/", expand=True)
+
+    df["AS_path"] = df["AS_path"].astype(str)
+    df["prefix_length"] = df["prefix_length"].astype(int)
+
+
+def geolocate_ip_df(df):
+    geocoder = IPGeocoder()
+
+    def lookup_func(row):
+        lat, long, state = geocoder.lookup_ip_coordinates(row["prefix"])
+        return pd.Series([lat, long, state])
+
+    output_cols = ["latitude", "longitude", "state"]
+
+    df[output_cols] = df.apply(lookup_func, axis=1)
+
+    filtered_df = df.dropna(subset=["latitude", "longitude", "state"])
+    print(filtered_df.head())
+    geocoder.close()
+    return filtered_df
 
 
 # Main function to run the script
@@ -22,14 +49,8 @@ def main(bgp_dump_file):
         names=column_names,
     )
 
-    # Format timestamp and AS_path columns
-    df["timestamp"] = pd.to_datetime(df["timestamp"], unit="s")
-    df[["prefix", "prefix_length"]] = df["prefix"].str.split("/", expand=True)
-
-    df["AS_path"] = df["AS_path"].astype(str)
-    df["prefix_length"] = df["prefix_length"].astype(int)
-
-    print(df.head())
+    format_df(df)
+    df = geolocate_ip_df(df)
 
     us_aggregator = USDataAggregator(df)
     us_json = us_aggregator.get_results()
