@@ -55,7 +55,7 @@ def main(bgp_dump_file):
     us_json = us_aggregator.get_results()
 
     # Write the JSON data to a file
-    save_json("../us.json", us_json)
+    # save_json("../us.json", us_json)
 
     print("Conversion completed. JSON data saved.")
 

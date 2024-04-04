@@ -1,4 +1,3 @@
-import pandas as pd
 from collections import defaultdict
 
 MOCKING = False
@@ -48,11 +47,14 @@ class USDataAggregator:
 
         result = defaultdict(list)
 
+        row_format = lambda row: {
+            "long": row.longitude,
+            "lat": row.latitude,
+            "count": int(row.count),
+        }
+
         for state, new_df in aggregated.groupby("state"):
-            result[state] = [
-                {"long": row.longitude, "lat": row.latitude, "count": int(row.count)}
-                for row in new_df.itertuples()
-            ]
+            result[state] = [row_format(row) for row in new_df.itertuples()]
 
         result = dict(result)
         print(result)
@@ -63,8 +65,10 @@ class USDataAggregator:
         prefix_length_distribution = self.get_prefix_length_distribution()
         us_announcement_heatmap = self.get_state_heatmap_data()
 
-        return {
+        result = {
             "overview": overview,
             "prefixLengthDistribution": prefix_length_distribution,
             "usAnnouncementHeatMap": us_announcement_heatmap,
         }
+        print(result)
+        return result
