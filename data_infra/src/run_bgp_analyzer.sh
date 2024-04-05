@@ -1,0 +1,1 @@
+python bgp_analyzer.py ../data/test/rib.20240321.2000.tail.size.50000.txt

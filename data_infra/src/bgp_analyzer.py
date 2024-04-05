@@ -4,10 +4,18 @@ import pandas as pd
 from utils.us_data_aggregator import USDataAggregator
 from utils.ip_geocoder import IPGeocoder
 
+# import pretty print
+import pprint
+
+
+def load_json(filename):
+    with open(filename, "r") as json_file:
+        return json.load(json_file)
+
 
 def save_json(filename, data):
     with open(filename, "w") as json_file:
-        json.dump(data, json_file, indent=4)
+        json_file.write(data)
 
 
 def format_df(df):
@@ -52,10 +60,11 @@ def main(bgp_dump_file):
     df = geolocate_ip_df(df)
 
     us_aggregator = USDataAggregator(df)
-    us_json = us_aggregator.get_results()
+    us_json, state_json = us_aggregator.get_results()
 
     # Write the JSON data to a file
-    # save_json("../us.json", us_json)
+    save_json("../us-output.json", us_json)
+    save_json("../state-output.json", state_json)
 
     print("Conversion completed. JSON data saved.")
 
@@ -63,3 +72,4 @@ def main(bgp_dump_file):
 if __name__ == "__main__":
     rib_file_path = sys.argv[1]
     main(rib_file_path)
+    # pprint.pprint(load_json("../state-output.json"))
