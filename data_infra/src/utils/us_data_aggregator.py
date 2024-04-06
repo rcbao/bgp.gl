@@ -159,8 +159,11 @@ class USDataAggregator:
         states = get_us_state_names()
 
         overviews = self.get_state_overview_results()
+        print("Got state overview")
         distributions = self.get_state_prefix_length_distribution()
+        print("Got state prefix length distribution")
         heatmap_data = self.get_state_heatmap_data()
+        print("Got state heatmap data")
 
         final_results = {}
         for state in states:
@@ -175,9 +178,13 @@ class USDataAggregator:
         return json.dumps(final_results, indent=4, default=convert_json)
 
     def get_us_results(self):
+        print("Getting US results")
         overview = self.get_overview_results()
+        print("Got overview")
         prefix_length_distribution = self.get_prefix_length_distribution()
+        print("Got prefix length distribution")
         us_announcement_heatmap = self.get_us_heapmap_data()
+        print("Got US announcement heatmap")
 
         result = {
             "overview": overview,
