@@ -136,9 +136,10 @@ class USDataAggregator:
 
         # Perform the same aggregation operation in parallel
         agg_columns = ["state", "latitude", "longitude"]
-        aggregated = ddf.groupby(agg_columns).size().reset_index(name="count")
 
-        # Compute the result in parallel and convert back to Pandas DataFrame for compatibility
+        aggregated = ddf.groupby(agg_columns).size()
+        aggregated = aggregated.rename("count").reset_index()
+
         with ProgressBar():
             result_df = aggregated.compute()
 
@@ -147,7 +148,7 @@ class USDataAggregator:
         row_format = lambda row: {
             "long": row.longitude,
             "lat": row.latitude,
-            "count": int(row["count"]),
+            "count": int(row.count),
         }
         for state, new_df in result_df.groupby("state"):
             result[state] = [row_format(row) for row in new_df.itertuples()]
