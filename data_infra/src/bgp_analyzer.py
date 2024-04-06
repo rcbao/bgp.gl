@@ -13,32 +13,34 @@ def load_json(filename):
         return json.load(json_file)
 
 
-def save_json(filename, data):
-    with open(filename, "w") as json_file:
-        json_file.write(data)
-
-
 def format_df(df):
-    # Format timestamp and AS_path columns
     df["timestamp"] = pd.to_datetime(df["timestamp"], unit="s")
-    df[["prefix", "prefix_length"]] = df["prefix"].str.split("/", expand=True)
-
+    prefix_df = (
+        df["prefix"]
+        .str.split("/", expand=True)
+        .rename(columns={0: "ip_prefix", 1: "prefix_length"})
+    )
+    # Drop the original 'prefix' column to avoid duplication
+    df.drop("prefix", axis=1, inplace=True)
+    df = pd.concat([df, prefix_df], axis=1)
     df["AS_path"] = df["AS_path"].astype(str)
     df["prefix_length"] = df["prefix_length"].astype(int)
+    return df
 
 
 def geolocate_ip_df(df):
     geocoder = IPGeocoder()
 
-    def lookup_func(row):
-        lat, long, state = geocoder.lookup_ip_coordinates(row["prefix"])
-        return pd.Series([lat, long, state])
+    # Pre-compute all unique IPs to minimize lookups
+    unique_ips = df["ip_prefix"].unique()
+    ip_locations = {ip: geocoder.lookup_ip_coordinates(ip) for ip in unique_ips}
 
-    output_columns = ["latitude", "longitude", "state"]
+    # Map the locations back to the DataFrame
+    df["latitude"] = df["ip_prefix"].map(lambda x: ip_locations[x][0])
+    df["longitude"] = df["ip_prefix"].map(lambda x: ip_locations[x][1])
+    df["state"] = df["ip_prefix"].map(lambda x: ip_locations[x][2])
 
-    df[output_columns] = df.apply(lookup_func, axis=1)
-    filtered_df = df.dropna(subset=output_columns)
-
+    filtered_df = df.dropna(subset=["latitude", "longitude", "state"])
     geocoder.close()
     return filtered_df
 
@@ -56,15 +58,13 @@ def main(bgp_dump_file):
         names=column_names,
     )
 
-    format_df(df)
+    df = format_df(df)
     df = geolocate_ip_df(df)
 
     us_aggregator = USDataAggregator(df)
     us_json, state_json = us_aggregator.get_results()
-
-    # Write the JSON data to a file
-    save_json("../us-output.json", us_json)
-    save_json("../state-output.json", state_json)
+    print(us_json)
+    print(state_json)
 
     print("Conversion completed. JSON data saved.")
 

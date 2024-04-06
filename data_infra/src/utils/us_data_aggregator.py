@@ -9,6 +9,11 @@ def load_json(filename):
         return json.load(json_file)
 
 
+def save_json(filename, data):
+    with open(filename, "w") as json_file:
+        json_file.write(data)
+
+
 def get_us_state_names():
     us_json = load_json(US_GEOJSON_FILE)
     return [state["properties"]["name"] for state in us_json["features"]]
@@ -30,7 +35,7 @@ class USDataAggregator:
 
     def get_overview_results(self):
         num_announcements = len(self.df)
-        most_advertised_prefixes = self.df["prefix"].mode().iloc[0]
+        most_advertised_prefixes = self.df["ip_prefix"].mode().iloc[0]
         as_with_most_routes = self.df["neighboring_AS"].mode().iloc[0]
         most_common_prefix_length = self.df["prefix_length"].mode().iloc[0]
 
@@ -80,7 +85,7 @@ class USDataAggregator:
             )
             num_ases = state_df["neighboring_AS"].nunique()
             most_advertised_prefixes = (
-                state_df["prefix"].mode().iloc[0] if not state_df.empty else None
+                state_df["ip_prefix"].mode().iloc[0] if not state_df.empty else None
             )
 
             # Compute metrics
@@ -173,8 +178,12 @@ class USDataAggregator:
             "prefixLengthDistribution": prefix_length_distribution,
             "usAnnouncementHeatMap": us_announcement_heatmap,
         }
-        print(result)
         return json.dumps(result, indent=4, default=convert_json)
 
     def get_results(self):
-        return [self.get_us_results(), self.get_state_results()]
+        us_json = self.get_us_results()
+        save_json("../us-output.json", us_json)
+
+        state_json = self.get_state_results()
+        save_json("../state-output.json", state_json)
+        return us_json, state_json
