@@ -30,7 +30,10 @@ def geolocate_ip_df(df):
 
     # Pre-compute all unique IPs to minimize lookups
     unique_ips = df["ip_prefix"].unique()
+    print("Geolocating IPs...")
+    print("number of unique ips", len(unique_ips))
     ip_locations = {ip: geocoder.lookup_ip_coordinates(ip) for ip in unique_ips}
+    print("IPs geolocated successfully.")
 
     # Map the locations back to the DataFrame
     df["latitude"] = df["ip_prefix"].map(lambda x: ip_locations[x][0])
