@@ -4,9 +4,6 @@ import pandas as pd
 from utils.us_data_aggregator import USDataAggregator
 from utils.ip_geocoder import IPGeocoder
 
-# import pretty print
-import pprint
-
 
 def load_json(filename):
     with open(filename, "r") as json_file:
@@ -72,4 +69,3 @@ def main(bgp_dump_file):
 if __name__ == "__main__":
     rib_file_path = sys.argv[1]
     main(rib_file_path)
-    # pprint.pprint(load_json("../state-output.json"))
