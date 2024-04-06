@@ -22,6 +22,7 @@ def format_df(df):
     df = pd.concat([df, prefix_df], axis=1)
     df["AS_path"] = df["AS_path"].astype(str)
     df["prefix_length"] = df["prefix_length"].astype(int)
+    df.sort_values(by="ip_prefix", inplace=True)
     return df
 
 
