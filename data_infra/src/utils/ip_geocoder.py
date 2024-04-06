@@ -9,6 +9,7 @@ class IPGeocoder:
         self.conn = sqlite3.connect(db_file)
         self.cursor = self.conn.cursor()
 
+    @lru_cache(maxsize=128)
     def lookup_ip_coordinates(self, ip_str):
         ip_int = int(ipaddress.ip_address(ip_str))
         self.cursor.execute(
@@ -19,6 +20,7 @@ class IPGeocoder:
         result = self.cursor.fetchone()
         if not result:
             return (None, None, None)
+        print(result)
         return result
 
     def close(self):
