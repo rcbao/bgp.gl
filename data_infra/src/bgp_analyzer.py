@@ -55,8 +55,12 @@ def main(bgp_dump_file):
         names=column_names,
     )
 
+    print("Data loaded successfully.")
+
     df = format_df(df)
+    print("Data formatted successfully.")
     df = geolocate_ip_df(df)
+    print("Data geolocated successfully.")
 
     us_aggregator = USDataAggregator(df)
     us_json, state_json = us_aggregator.get_results()
