@@ -9,6 +9,7 @@ django = "*"
 mrtparse = "*"
 geocoder = "*"
 pandas = "*"
+dask = {extras = ["complete"], version = "*"}
 
 [dev-packages]
 

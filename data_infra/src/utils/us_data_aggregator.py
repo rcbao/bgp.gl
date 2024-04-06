@@ -2,6 +2,8 @@ from collections import defaultdict
 import json
 import numpy as np
 from .constants import US_GEOJSON_FILE
+import dask.dataframe as dd
+from dask.diagnostics import ProgressBar
 
 
 def load_json(filename):
@@ -108,7 +110,6 @@ class USDataAggregator:
         }
 
         for state in states:
-            # Filter DataFrame for the current state
             state_df = self.df[self.df["state"] == state]
             distribution = (
                 state_df.groupby("prefix_length").size().reset_index(name="count")
@@ -131,23 +132,27 @@ class USDataAggregator:
             'Nebraska': [{'long': -96.1494, 'lat': 41.2854, 'count': 28}]
         }
         """
+        ddf = dd.from_pandas(self.df, npartitions=24)
+
+        # Perform the same aggregation operation in parallel
         agg_columns = ["state", "latitude", "longitude"]
-        aggregated = self.df.groupby(agg_columns).size().reset_index(name="count")
+        aggregated = ddf.groupby(agg_columns).size().reset_index(name="count")
 
+        # Compute the result in parallel and convert back to Pandas DataFrame for compatibility
+        with ProgressBar():
+            result_df = aggregated.compute()
+
+        # Format the result as needed (similar to the original implementation)
         result = defaultdict(list)
-
         row_format = lambda row: {
             "long": row.longitude,
             "lat": row.latitude,
-            "count": int(row.count),
+            "count": int(row["count"]),
         }
-
-        for state, new_df in aggregated.groupby("state"):
+        for state, new_df in result_df.groupby("state"):
             result[state] = [row_format(row) for row in new_df.itertuples()]
 
-        result = dict(result)
-        print(result)
-        return result
+        return dict(result)
 
     def get_state_results(self):
         states = get_us_state_names()
