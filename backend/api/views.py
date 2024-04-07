@@ -1,8 +1,7 @@
-import os
+import json
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .components.map_data_connector import MapDataConnector
 
 
 def internal_server_error():
@@ -11,17 +10,25 @@ def internal_server_error():
     return Response(error_response, status=error_code)
 
 
+def load_json(filename):
+    with open(filename, "r") as json_file:
+        return json.load(json_file)
+
+
+def save_json(filename, data):
+    with open(filename, "w") as json_file:
+        json_file.write(data)
+
+
 class USDataView(APIView):
     """The API view for the entire US data"""
 
     def get(self, request, *args, **kwargs):
         try:
             # Build the initial prompt using OpeningPromptBuilder
-            map_data = MapDataConnector().get_us_data()
-            widget_data = {}
-            us_data_response = {"map_data": map_data, "widget_data": widget_data}
+            us_data = load_json("api/data/us-output.json")
 
-            return Response(us_data_response, status=status.HTTP_200_OK)
+            return Response(us_data, status=status.HTTP_200_OK)
 
         except ValueError as ve:
             print(str(ve))

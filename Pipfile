@@ -10,6 +10,7 @@ mrtparse = "*"
 geocoder = "*"
 pandas = "*"
 dask = {extras = ["complete"], version = "*"}
+django-cors-headers = "*"
 
 [dev-packages]
 
