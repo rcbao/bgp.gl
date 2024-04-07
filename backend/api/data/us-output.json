@@ -1,0 +1,156 @@
+{
+    "overview": {
+        "numberOfAnnouncements": 1380383,
+        "mostAdvertisedIpPrefixes": "74.192.0.0",
+        "asWithMostRoutes": 3549,
+        "mostCommonPrefixLength": 24
+    },
+    "prefixLengthDistribution": [
+        {
+            "length": 8,
+            "count": 76
+        },
+        {
+            "length": 9,
+            "count": 25
+        },
+        {
+            "length": 10,
+            "count": 50
+        },
+        {
+            "length": 11,
+            "count": 379
+        },
+        {
+            "length": 12,
+            "count": 761
+        },
+        {
+            "length": 13,
+            "count": 1345
+        },
+        {
+            "length": 14,
+            "count": 3344
+        },
+        {
+            "length": 15,
+            "count": 5018
+        },
+        {
+            "length": 16,
+            "count": 14628
+        },
+        {
+            "length": 17,
+            "count": 15416
+        },
+        {
+            "length": 18,
+            "count": 26682
+        },
+        {
+            "length": 19,
+            "count": 52071
+        },
+        {
+            "length": 20,
+            "count": 105275
+        },
+        {
+            "length": 21,
+            "count": 78741
+        },
+        {
+            "length": 22,
+            "count": 121113
+        },
+        {
+            "length": 23,
+            "count": 134361
+        },
+        {
+            "length": 24,
+            "count": 820591
+        },
+        {
+            "length": 25,
+            "count": 90
+        },
+        {
+            "length": 26,
+            "count": 132
+        },
+        {
+            "length": 27,
+            "count": 219
+        },
+        {
+            "length": 29,
+            "count": 46
+        },
+        {
+            "length": 30,
+            "count": 2
+        },
+        {
+            "length": 32,
+            "count": 18
+        }
+    ],
+    "usAnnouncementHeatMap": {
+        "Alabama": 17168,
+        "Alaska": 2854,
+        "Arizona": 33817,
+        "Arkansas": 13840,
+        "California": 168663,
+        "Colorado": 25876,
+        "Connecticut": 6376,
+        "Delaware": 2025,
+        "District of Columbia": 21808,
+        "Florida": 66766,
+        "Georgia": 44780,
+        "Hawaii": 2304,
+        "Idaho": 19549,
+        "Illinois": 52847,
+        "Indiana": 16274,
+        "Iowa": 33323,
+        "Kansas": 15608,
+        "Kentucky": 19271,
+        "Louisiana": 18946,
+        "Maine": 13098,
+        "Maryland": 11435,
+        "Massachusetts": 16274,
+        "Michigan": 31499,
+        "Minnesota": 18813,
+        "Mississippi": 15678,
+        "Missouri": 30855,
+        "Montana": 7270,
+        "Nebraska": 12298,
+        "Nevada": 14095,
+        "New Hampshire": 12071,
+        "New Jersey": 27643,
+        "New Mexico": 10370,
+        "New York": 65804,
+        "North Carolina": 38430,
+        "North Dakota": 7660,
+        "Ohio": 50388,
+        "Oklahoma": 22096,
+        "Oregon": 30218,
+        "Pennsylvania": 31912,
+        "Rhode Island": 2585,
+        "South Carolina": 31237,
+        "South Dakota": 6220,
+        "Tennessee": 15789,
+        "Texas": 112803,
+        "Utah": 14610,
+        "Vermont": 5861,
+        "Virginia": 84224,
+        "Washington": 28646,
+        "West Virginia": 4167,
+        "Wisconsin": 21848,
+        "Wyoming": 2391,
+        "Puerto Rico": 0
+    }
+}
