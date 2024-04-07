@@ -36,3 +36,30 @@ class USDataView(APIView):
         except Exception as e:
             print(e)
             return internal_server_error()
+
+
+class StateDataView(APIView):
+    """The API view for state-specific data"""
+
+    def get(self, request, state_name, *args, **kwargs):
+        try:
+            all_states_data = load_json("api/data/state-output.json")
+
+            # Ensure state name exists in the data, and it's case-insensitive
+            state_data = all_states_data.get(
+                state_name.title()
+            )  # Adjust as needed for your data's case
+
+            if state_data:
+                return Response(state_data, status=status.HTTP_200_OK)
+            else:
+                return Response(
+                    {"error": "State not found"}, status=status.HTTP_404_NOT_FOUND
+                )
+
+        except ValueError as ve:
+            print(str(ve))
+            return Response({"error": str(ve)}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            print(e)
+            return internal_server_error()
