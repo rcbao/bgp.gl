@@ -46,9 +46,7 @@ class StateDataView(APIView):
             all_states_data = load_json("api/data/state-output.json")
 
             # Ensure state name exists in the data, and it's case-insensitive
-            state_data = all_states_data.get(
-                state_name.title()
-            )  # Adjust as needed for your data's case
+            state_data = all_states_data.get(state_name)
 
             if state_data:
                 return Response(state_data, status=status.HTTP_200_OK)

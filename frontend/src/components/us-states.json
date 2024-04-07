@@ -5580,7 +5580,8 @@
                 "center": {
                     "latitude": 38.9101,
                     "longitude": -77.0147
-                }
+                },
+                "abbreviation": "dc"
             },
             "geometry": {
                 "type": "Polygon",
