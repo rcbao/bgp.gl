@@ -3,6 +3,7 @@
         "numberOfAnnouncements": 3327433,
         "mostAdvertisedIpPrefixes": "74.192.0.0",
         "asWithMostRoutes": 3549,
+        "asWithMostAnnouncementsName": "Level 3 Comm., Inc.",
         "mostCommonPrefixLength": 24
     },
     "prefixLengthDistribution": [

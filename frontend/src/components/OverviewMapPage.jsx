@@ -72,7 +72,11 @@ const OverviewMapPage = () => {
                                     Org with Most Routes
                                 </h5>
                                 <h3 className="dashboard-widget-card-data">
-                                    Google Inc.
+                                    {
+                                        data["overview"][
+                                            "asWithMostAnnouncementsName"
+                                        ]
+                                    }
                                 </h3>
                             </div>
                             <div className="dashboard-widget-card">
