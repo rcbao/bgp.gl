@@ -30,6 +30,10 @@ const OverviewMapPage = () => {
         fetchData();
     }, [navigate]);
 
+    if (!data || !data["overview"]) {
+        return null;
+    }
+
     return (
         data && (
             <div className="columns-2 flex flex-row">
@@ -48,7 +52,7 @@ const OverviewMapPage = () => {
                                     BGP Announcements
                                 </h5>
                                 <h3 className="dashboard-widget-card-data">
-                                    {128000}
+                                    {data["overview"]["numberOfAnnouncements"]}
                                 </h3>
                             </div>
                             <div className="dashboard-widget-card">
@@ -56,7 +60,11 @@ const OverviewMapPage = () => {
                                     Most Advertised Prefix
                                 </h5>
                                 <h3 className="dashboard-widget-card-data">
-                                    127.0.0.1
+                                    {
+                                        data["overview"][
+                                            "mostAdvertisedIpPrefixes"
+                                        ]
+                                    }
                                 </h3>
                             </div>
                             <div className="dashboard-widget-card">
@@ -72,7 +80,7 @@ const OverviewMapPage = () => {
                                     Most Advertised Prefix Length
                                 </h5>
                                 <h3 className="dashboard-widget-card-data">
-                                    12
+                                    {data["overview"]["mostCommonPrefixLength"]}
                                 </h3>
                             </div>
                         </div>

@@ -71,6 +71,14 @@ const StateMapPage = () => {
                             </div>
                             <div className="dashboard-widget-card">
                                 <h5 className="dashboard-widget-card-header">
+                                    {stateName} Local ASes
+                                </h5>
+                                <h3 className="dashboard-widget-card-data">
+                                    {data["overview"]["numberOfLocalASes"]}
+                                </h3>
+                            </div>
+                            <div className="dashboard-widget-card">
+                                <h5 className="dashboard-widget-card-header">
                                     Most Advertised Prefix
                                 </h5>
                                 <h3 className="dashboard-widget-card-data">
@@ -81,20 +89,13 @@ const StateMapPage = () => {
                                     }
                                 </h3>
                             </div>
+
                             <div className="dashboard-widget-card">
                                 <h5 className="dashboard-widget-card-header">
-                                    Org with Most Routes
+                                    Most Active AS
                                 </h5>
                                 <h3 className="dashboard-widget-card-data">
                                     state Inc.
-                                </h3>
-                            </div>
-                            <div className="dashboard-widget-card">
-                                <h5 className="dashboard-widget-card-header">
-                                    Most Advertised Prefix Length
-                                </h5>
-                                <h3 className="dashboard-widget-card-data">
-                                    12
                                 </h3>
                             </div>
                         </div>
