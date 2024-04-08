@@ -62,6 +62,12 @@ const OverviewMap = (props) => {
         autoHighlight: true,
         highlightColor: fillColors.highlight,
         pickable: true,
+        material: {
+            ambient: 0.64,
+            diffuse: 0.6,
+            shininess: 32,
+            specularColor: [51, 51, 51],
+        },
         onClick: ({ object, x, y }) => {
             if (object) {
                 const stateAbbr = object.properties.abbreviation;

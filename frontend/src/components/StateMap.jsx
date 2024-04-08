@@ -64,8 +64,14 @@ const StateMap = ({ data, stateName, radius = 2000, coverage = 1 }) => {
                 elevationAggregation: "SUM",
                 elevationScale: 128,
                 radius: radius,
-
+                coverage: coverage,
                 pickable: true,
+                material: {
+                    ambient: 0.64,
+                    diffuse: 0.6,
+                    shininess: 32,
+                    specularColor: [51, 51, 51],
+                },
             });
         } else {
             return new ContourLayer({
