@@ -49,7 +49,7 @@ const OverviewMapPage = () => {
                         <div className="grid grid-cols-2 gap-4">
                             <div className="dashboard-widget-card ">
                                 <h5 className="dashboard-widget-card-header">
-                                    BGP Announcements
+                                    # BGP Announcements
                                 </h5>
                                 <h3 className="dashboard-widget-card-data">
                                     {data["overview"]["numberOfAnnouncements"]}

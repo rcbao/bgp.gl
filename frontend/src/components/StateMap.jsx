@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { HexagonLayer, ContourLayer } from "@deck.gl/aggregation-layers";
 import { GeoJsonLayer } from "@deck.gl/layers";
 import { fillColors, lineColors, toolTipStyle } from "./utils/constants";
@@ -48,7 +49,14 @@ const StateMap = ({ data, stateName, radius = 2000, coverage = 1 }) => {
         return null; // Return null or a loading indicator while data is being fetched
     }
 
-    const [selectedStateId, stateViewState] = getStateViewState(stateName);
+    let [selectedStateId, initialViewState] = getStateViewState(stateName);
+    const [viewState, setViewState] = useState(initialViewState);
+
+    const resetMap = () =>
+        setViewState({
+            ...initialViewState,
+            latitude: initialViewState.latitude + Math.random() * 0.001,
+        });
 
     const getDataLayer = () => {
         if (!USE_CONTOUR_MAP) {
@@ -130,12 +138,27 @@ const StateMap = ({ data, stateName, radius = 2000, coverage = 1 }) => {
     ];
 
     return (
-        stateViewState && (
-            <DeckGLMap
-                layers={layers}
-                viewState={stateViewState}
-                getTooltip={getTooltip}
-            />
+        viewState && (
+            <div>
+                <DeckGLMap
+                    layers={layers}
+                    viewState={viewState}
+                    onViewStateChange={({ viewState }) =>
+                        setViewState(viewState)
+                    }
+                    getTooltip={getTooltip}
+                />
+                <button
+                    className="absolute bottom-5 left-5 z-50 cursor-pointer"
+                    onClick={() => {
+                        resetMap();
+                    }}
+                >
+                    <h3 className="float-left font-bold text-lg text-black rounded-lg">
+                        Home
+                    </h3>
+                </button>
+            </div>
         )
     );
 };

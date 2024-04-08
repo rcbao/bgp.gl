@@ -10,6 +10,7 @@ const StateMapPage = () => {
 
     const navigate = useNavigate();
     const [data, setData] = useState({});
+    const [mapData, setMapData] = useState({});
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,10 +23,10 @@ const StateMapPage = () => {
                     },
                 }
             );
-            const mapData = await response.json();
+            const res = await response.json();
             if (response.ok) {
-                setData(mapData);
-                console.log(mapData);
+                setData(res);
+                setMapData(res["charts"]["stateAnnouncementHeatMap"]);
             } else {
                 navigate(`/`);
             }
@@ -51,10 +52,7 @@ const StateMapPage = () => {
     return (
         data && (
             <div className="columns-2 flex flex-row">
-                <StateMap
-                    data={data["charts"]["stateAnnouncementHeatMap"]}
-                    stateName={stateAbbr}
-                />
+                <StateMap data={mapData} stateName={stateAbbr} />
                 <div style={{ width: "40vw" }} className="p-10">
                     <h1
                         className="text-3xl font-bold"
@@ -72,7 +70,7 @@ const StateMapPage = () => {
                         <div className="grid grid-cols-2 gap-4">
                             <div className="dashboard-widget-card ">
                                 <h5 className="dashboard-widget-card-header">
-                                    BGP Announcements
+                                    # BGP Announcements
                                 </h5>
                                 <h3 className="dashboard-widget-card-data">
                                     {data["overview"]["numberOfAnnouncements"]}
@@ -80,7 +78,7 @@ const StateMapPage = () => {
                             </div>
                             <div className="dashboard-widget-card">
                                 <h5 className="dashboard-widget-card-header">
-                                    {stateAbbr.toUpperCase()} Local ASes
+                                    # Local ASes
                                 </h5>
                                 <h3 className="dashboard-widget-card-data">
                                     {data["overview"]["numberOfLocalASes"]}
