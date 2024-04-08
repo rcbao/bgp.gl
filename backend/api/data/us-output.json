@@ -1,6 +1,6 @@
 {
     "overview": {
-        "numberOfAnnouncements": 1380383,
+        "numberOfAnnouncements": 3327433,
         "mostAdvertisedIpPrefixes": "74.192.0.0",
         "asWithMostRoutes": 3549,
         "mostCommonPrefixLength": 24
@@ -12,145 +12,153 @@
         },
         {
             "length": 9,
-            "count": 25
+            "count": 75
         },
         {
             "length": 10,
-            "count": 50
+            "count": 151
         },
         {
             "length": 11,
-            "count": 379
+            "count": 533
         },
         {
             "length": 12,
-            "count": 761
+            "count": 1238
         },
         {
             "length": 13,
-            "count": 1345
+            "count": 2155
         },
         {
             "length": 14,
-            "count": 3344
+            "count": 4925
         },
         {
             "length": 15,
-            "count": 5018
+            "count": 7872
         },
         {
             "length": 16,
-            "count": 14628
+            "count": 53115
         },
         {
             "length": 17,
-            "count": 15416
+            "count": 32382
         },
         {
             "length": 18,
-            "count": 26682
+            "count": 53868
         },
         {
             "length": 19,
-            "count": 52071
+            "count": 98677
         },
         {
             "length": 20,
-            "count": 105275
+            "count": 192798
         },
         {
             "length": 21,
-            "count": 78741
+            "count": 174363
         },
         {
             "length": 22,
-            "count": 121113
+            "count": 306730
         },
         {
             "length": 23,
-            "count": 134361
+            "count": 330826
         },
         {
             "length": 24,
-            "count": 820591
+            "count": 2066186
         },
         {
             "length": 25,
-            "count": 90
+            "count": 218
         },
         {
             "length": 26,
-            "count": 132
+            "count": 325
         },
         {
             "length": 27,
-            "count": 219
+            "count": 435
+        },
+        {
+            "length": 28,
+            "count": 76
         },
         {
             "length": 29,
-            "count": 46
+            "count": 189
         },
         {
             "length": 30,
-            "count": 2
+            "count": 62
+        },
+        {
+            "length": 31,
+            "count": 85
         },
         {
             "length": 32,
-            "count": 18
+            "count": 73
         }
     ],
     "usAnnouncementHeatMap": {
-        "Alabama": 17168,
-        "Alaska": 2854,
-        "Arizona": 33817,
-        "Arkansas": 13840,
-        "California": 168663,
-        "Colorado": 25876,
-        "Connecticut": 6376,
-        "Delaware": 2025,
-        "District of Columbia": 21808,
-        "Florida": 66766,
-        "Georgia": 44780,
-        "Hawaii": 2304,
-        "Idaho": 19549,
-        "Illinois": 52847,
-        "Indiana": 16274,
-        "Iowa": 33323,
-        "Kansas": 15608,
-        "Kentucky": 19271,
-        "Louisiana": 18946,
-        "Maine": 13098,
-        "Maryland": 11435,
-        "Massachusetts": 16274,
-        "Michigan": 31499,
-        "Minnesota": 18813,
-        "Mississippi": 15678,
-        "Missouri": 30855,
-        "Montana": 7270,
-        "Nebraska": 12298,
-        "Nevada": 14095,
-        "New Hampshire": 12071,
-        "New Jersey": 27643,
-        "New Mexico": 10370,
-        "New York": 65804,
-        "North Carolina": 38430,
-        "North Dakota": 7660,
-        "Ohio": 50388,
-        "Oklahoma": 22096,
-        "Oregon": 30218,
-        "Pennsylvania": 31912,
-        "Rhode Island": 2585,
-        "South Carolina": 31237,
-        "South Dakota": 6220,
-        "Tennessee": 15789,
-        "Texas": 112803,
-        "Utah": 14610,
-        "Vermont": 5861,
-        "Virginia": 84224,
-        "Washington": 28646,
-        "West Virginia": 4167,
-        "Wisconsin": 21848,
-        "Wyoming": 2391,
+        "Alabama": 40485,
+        "Alaska": 6943,
+        "Arizona": 82249,
+        "Arkansas": 30608,
+        "California": 416519,
+        "Colorado": 61929,
+        "Connecticut": 19821,
+        "Delaware": 9075,
+        "District of Columbia": 55175,
+        "Florida": 170685,
+        "Georgia": 102797,
+        "Hawaii": 6205,
+        "Idaho": 47931,
+        "Illinois": 144766,
+        "Indiana": 42935,
+        "Iowa": 87203,
+        "Kansas": 30998,
+        "Kentucky": 39591,
+        "Louisiana": 40785,
+        "Maine": 17754,
+        "Maryland": 37001,
+        "Massachusetts": 43878,
+        "Michigan": 69168,
+        "Minnesota": 53310,
+        "Mississippi": 44466,
+        "Missouri": 78932,
+        "Montana": 13069,
+        "Nebraska": 25863,
+        "Nevada": 32581,
+        "New Hampshire": 18834,
+        "New Jersey": 72707,
+        "New Mexico": 25800,
+        "New York": 211763,
+        "North Carolina": 75447,
+        "North Dakota": 12455,
+        "Ohio": 96520,
+        "Oklahoma": 49886,
+        "Oregon": 52649,
+        "Pennsylvania": 74119,
+        "Rhode Island": 6956,
+        "South Carolina": 70915,
+        "South Dakota": 12901,
+        "Tennessee": 42670,
+        "Texas": 267772,
+        "Utah": 34337,
+        "Vermont": 8488,
+        "Virginia": 199970,
+        "Washington": 73978,
+        "West Virginia": 8040,
+        "Wisconsin": 47870,
+        "Wyoming": 10634,
         "Puerto Rico": 0
     }
 }
