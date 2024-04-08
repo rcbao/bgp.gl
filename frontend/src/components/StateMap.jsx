@@ -1,6 +1,6 @@
 import { HexagonLayer, ContourLayer } from "@deck.gl/aggregation-layers";
 import { GeoJsonLayer } from "@deck.gl/layers";
-import { fillColors } from "./utils/constants";
+import { fillColors, lineColors } from "./utils/constants";
 import { findStateByAbbreviation } from "./utils/utils";
 import usStatesGeoJson from "./us-states.json";
 import DeckGLMap from "./DeckGLMap";
@@ -119,7 +119,7 @@ const StateMap = ({ data, stateName, radius = 2000, coverage = 1 }) => {
                 d.id === selectedStateId
                     ? fillColors.highlightDark
                     : fillColors.defaultDark,
-            getLineColor: [0, 0, 0, 255],
+            getLineColor: lineColors.white,
         }),
     ];
 

@@ -27,7 +27,6 @@ const StateMapPage = () => {
                 setData(mapData);
                 console.log(mapData);
             } else {
-                // if cannot access user info: show an error message
                 navigate(`/`);
             }
         };

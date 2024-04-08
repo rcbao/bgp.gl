@@ -31,7 +31,7 @@ export const material = {
 };
 
 export const MAP_STYLE =
-    "https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
+    "https://basemaps.cartocdn.com/gl/voyager-nolabels-gl-style/style.json";
 
 export const colorRange = [
     [1, 152, 189],
@@ -53,4 +53,9 @@ export const fillColors = {
     highlight: [131, 142, 177, 160],
     defaultDark: [131, 142, 177, 25],
     highlightDark: [131, 142, 177, 100],
+};
+
+export const lineColors = {
+    white: [255, 255, 255, 255],
+    black: [0, 0, 0, 255],
 };
