@@ -1,7 +1,7 @@
 import { GeoJsonLayer } from "@deck.gl/layers";
 import usStatesGeoJson from "./us-states.json";
 import DeckGLMap from "./DeckGLMap";
-import { fillColors, lineColors } from "./utils/constants";
+import { fillColors, lineColors, toolTipStyle } from "./utils/constants";
 
 export const overviewViewState = {
     longitude: -97,
@@ -45,13 +45,7 @@ const OverviewMap = (props) => {
                 html: `<div>${stateName} (${stateAbbr.toUpperCase()})<br/> ${
                     announcements || 0
                 } announcements</div>`,
-                style: {
-                    backgroundColor: "#E3FEF7",
-                    fontSize: "0.8em",
-                    color: "#000",
-                    borderRadius: "0.5em",
-                    fontWeight: "500",
-                },
+                style: toolTipStyle,
             }
         );
     };

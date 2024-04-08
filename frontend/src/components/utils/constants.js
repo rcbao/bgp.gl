@@ -59,3 +59,12 @@ export const lineColors = {
     white: [255, 255, 255, 255],
     black: [0, 0, 0, 255],
 };
+
+export const toolTipStyle = {
+    backgroundColor: "#E3FEF7",
+    fontSize: "0.875em",
+    color: "#000",
+    borderRadius: "0.5em",
+    fontWeight: "500",
+    boxShadow: "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+};

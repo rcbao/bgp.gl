@@ -1,6 +1,6 @@
 import { HexagonLayer, ContourLayer } from "@deck.gl/aggregation-layers";
 import { GeoJsonLayer } from "@deck.gl/layers";
-import { fillColors, lineColors } from "./utils/constants";
+import { fillColors, lineColors, toolTipStyle } from "./utils/constants";
 import { findStateByAbbreviation } from "./utils/utils";
 import usStatesGeoJson from "./us-states.json";
 import DeckGLMap from "./DeckGLMap";
@@ -28,10 +28,16 @@ const getTooltip = ({ object }) => {
     const lat = object.position[1];
     const lng = object.position[0];
 
-    return `\
-    latitude: ${Number.isFinite(lat) ? lat.toFixed(4) : ""}
-    longitude: ${Number.isFinite(lng) ? lng.toFixed(4) : ""}
-    ${object.elevationValue} announcements`;
+    return (
+        object && {
+            html: `<div>Latitude: ${
+                Number.isFinite(lat) ? lat.toFixed(4) : ""
+            }<br/>
+            Longitude: ${Number.isFinite(lng) ? lng.toFixed(4) : ""}<br/>
+            ${object.elevationValue} announcements</div>`,
+            style: toolTipStyle,
+        }
+    );
 };
 
 const StateMap = ({ data, stateName, radius = 2000, coverage = 1 }) => {
