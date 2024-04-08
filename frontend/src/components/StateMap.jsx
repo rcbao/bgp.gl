@@ -154,7 +154,7 @@ const StateMap = ({ data, stateName, radius = 2000, coverage = 1 }) => {
                         resetMap();
                     }}
                 >
-                    <h3 className="float-left font-bold text-lg text-black rounded-lg">
+                    <h3 className="float-left font-bold text-black rounded-lg">
                         Home
                     </h3>
                 </button>

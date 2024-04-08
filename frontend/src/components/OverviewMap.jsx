@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { GeoJsonLayer } from "@deck.gl/layers";
 import usStatesGeoJson from "./us-states.json";
 import DeckGLMap from "./DeckGLMap";
@@ -50,6 +51,14 @@ const OverviewMap = (props) => {
         );
     };
 
+    const [viewState, setViewState] = useState(overviewViewState);
+
+    const resetMap = () =>
+        setViewState({
+            ...overviewViewState,
+            latitude: overviewViewState.latitude + Math.random() * 0.001,
+        });
+
     const layers = [
         new GeoJsonLayer({
             id: "geojson-layer",
@@ -84,11 +93,26 @@ const OverviewMap = (props) => {
     ];
     return (
         data && (
-            <DeckGLMap
-                layers={layers}
-                viewState={overviewViewState}
-                getTooltip={getTooltip}
-            />
+            <div>
+                <DeckGLMap
+                    layers={layers}
+                    viewState={viewState}
+                    getTooltip={getTooltip}
+                    onViewStateChange={({ viewState }) =>
+                        setViewState(viewState)
+                    }
+                />
+                <button
+                    className="absolute bottom-5 left-5 z-50 cursor-pointer"
+                    onClick={() => {
+                        resetMap();
+                    }}
+                >
+                    <h3 className="float-left font-bold text-lg text-black rounded-lg">
+                        Home
+                    </h3>
+                </button>
+            </div>
         )
     );
 };
