@@ -81,7 +81,7 @@ const StateMapPage = () => {
                             </div>
                             <div className="dashboard-widget-card">
                                 <h5 className="dashboard-widget-card-header">
-                                    {stateName} Local ASes
+                                    {stateAbbr.toUpperCase()} Local ASes
                                 </h5>
                                 <h3 className="dashboard-widget-card-data">
                                     {data["overview"]["numberOfLocalASes"]}
