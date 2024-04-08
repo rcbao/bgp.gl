@@ -7,7 +7,7 @@ export default function Header() {
             to={`/`}
             style={{ textDecoration: "none" }}
         >
-            <h1 className="float-left font-bold bg-white p-2 px-4 rounded-md text-3xl text-black">
+            <h1 className="float-left font-bold bg-white p-2 px-4 text-3xl text-black rounded-lg">
                 US BGP Map
             </h1>
         </Link>
