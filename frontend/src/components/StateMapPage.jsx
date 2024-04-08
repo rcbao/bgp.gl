@@ -102,14 +102,6 @@ const StateMapPage = () => {
 
                             <div className="dashboard-widget-card">
                                 <h5 className="dashboard-widget-card-header">
-                                    Most Active AS
-                                </h5>
-                                <h3 className="dashboard-widget-card-data">
-                                    state Inc.
-                                </h3>
-                            </div>
-                            <div className="dashboard-widget-card">
-                                <h5 className="dashboard-widget-card-header">
                                     Most Advertised Prefix Length
                                 </h5>
                                 <h3 className="dashboard-widget-card-data">
