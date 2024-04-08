@@ -39,6 +39,16 @@ const StateMapPage = () => {
         return null;
     }
 
+    // Get most advertised prefix length
+    const prefixLengthDistribution = data["charts"]["prefixLengthDistribution"];
+    let maxLengthEntry = prefixLengthDistribution[0];
+    prefixLengthDistribution.forEach((entry) => {
+        if (entry.count > maxLengthEntry.count) {
+            maxLengthEntry = entry;
+        }
+    });
+    const maxLength = maxLengthEntry.length;
+
     return (
         data && (
             <div className="columns-2 flex flex-row">
@@ -96,6 +106,14 @@ const StateMapPage = () => {
                                 </h5>
                                 <h3 className="dashboard-widget-card-data">
                                     state Inc.
+                                </h3>
+                            </div>
+                            <div className="dashboard-widget-card">
+                                <h5 className="dashboard-widget-card-header">
+                                    Most Advertised Prefix Length
+                                </h5>
+                                <h3 className="dashboard-widget-card-data">
+                                    {maxLength}
                                 </h3>
                             </div>
                         </div>
