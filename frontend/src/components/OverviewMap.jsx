@@ -12,18 +12,41 @@ export const overviewViewState = {
 };
 
 const getColorFromAnnouncements = (announcements) => {
-    // This is a simple example - you might want to implement a more complex function
-    // that maps a range of announcement counts to different colors.
-    if (announcements < 10000) {
-        return [221, 221, 221, 200];
+    if (announcements < 5000) {
+        return [221, 221, 221, 200]; // Basically grey
+    } else if (announcements < 10000) {
+        return [204, 229, 255, 200]; // Very light blue
+    } else if (announcements < 25000) {
+        return [153, 204, 255, 200]; // Light blue
     } else if (announcements < 50000) {
-        return [167, 201, 232, 200];
+        return [102, 178, 255, 200]; // Medium light blue
     } else if (announcements < 100000) {
-        return [85, 150, 213, 200];
+        return [51, 153, 255, 200]; // Medium dark blue
+    } else if (announcements < 250000) {
+        return [0, 128, 255, 200]; // Dark blue
+    } else if (announcements < 400000) {
+        return [0, 102, 204, 200]; // Darker blue
     } else {
-        return [60, 103, 150, 200]; // Green for 0 announcements
+        return [0, 51, 153, 200]; // Darkest blue, for announcements >= 400000
     }
 };
+
+// attempt at heat gradient with other colors, but not sure if it looks good...
+// const getColorFromAnnouncements = (announcements) => {
+//    if (announcements < 25000) {
+//        return [29,72,119, 200]; // Blue
+//    } else if (announcements < 50000) {
+//        return [27,138,90, 200]; // Green
+//    } else if (announcements < 100000) {
+//        return [230,170,30, 200]; // Yellow
+//    } else if (announcements < 300000) {
+//        return [246,136,56, 200]; // Orange
+//    } else if (announcements < 400000) {
+//        return [238,62,50, 200]; // Red
+//    } else {
+//        return [139, 0, 0, 200]; // Dark red for >= 400000
+//    }
+//};
 
 const OverviewMap = (props) => {
     const data = props.data;
