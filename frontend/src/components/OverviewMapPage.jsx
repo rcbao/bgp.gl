@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "maplibre-gl/dist/maplibre-gl.css";
 import OverviewMap from "./OverviewMap";
+import PrefixDistributionChart from "./PrefixDistroChart";
 
 const OverviewMapPage = () => {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ const OverviewMapPage = () => {
         fetchData();
     }, [navigate]);
 
-    if (!data || !data["overview"]) {
+    if (!(data && data["overview"] && data["prefixLengthDistribution"])) {
         return null;
     }
 
@@ -87,6 +88,9 @@ const OverviewMapPage = () => {
                                     {data["overview"]["mostCommonPrefixLength"]}
                                 </h3>
                             </div>
+                            <PrefixDistributionChart
+                                data={data["prefixLengthDistribution"]}
+                            />
                         </div>
                     </div>
                 </div>

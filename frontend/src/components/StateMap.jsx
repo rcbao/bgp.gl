@@ -149,13 +149,13 @@ const StateMap = ({ data, stateName, radius = 2000, coverage = 1 }) => {
                     getTooltip={getTooltip}
                 />
                 <button
-                    className="absolute bottom-5 left-5 z-50 cursor-pointer"
+                    className="absolute bottom-5 left-5 z-50 cursor-pointer rounded-2xl"
                     onClick={() => {
                         resetMap();
                     }}
                 >
-                    <h3 className="float-left font-bold text-black rounded-lg">
-                        Home
+                    <h3 className="float-left font-bold text-black">
+                        Recenter
                     </h3>
                 </button>
             </div>

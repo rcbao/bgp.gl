@@ -40,14 +40,11 @@ const StateMapPage = () => {
     }
 
     // Get most advertised prefix length
-    const prefixLengthDistribution = data["charts"]["prefixLengthDistribution"];
-    let maxLengthEntry = prefixLengthDistribution[0];
-    prefixLengthDistribution.forEach((entry) => {
-        if (entry.count > maxLengthEntry.count) {
-            maxLengthEntry = entry;
-        }
-    });
-    const maxLength = maxLengthEntry.length;
+    const prefixDist = data["charts"]["prefixLengthDistribution"];
+    const maxLengthIndex = prefixDist["counts"].indexOf(
+        Math.max(...prefixDist["counts"])
+    );
+    const maxLength = prefixDist["lengths"][maxLengthIndex];
 
     return (
         data && (

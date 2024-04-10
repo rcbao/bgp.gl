@@ -28,6 +28,16 @@ class USDataView(APIView):
             # Build the initial prompt using OpeningPromptBuilder
             us_data = load_json("api/data/us-output.json")
 
+            prefix_distribution = us_data["prefixLengthDistribution"]
+
+            lengths = [item["length"] for item in prefix_distribution]
+            counts = [item["count"] for item in prefix_distribution]
+
+            us_data["prefixLengthDistribution"] = {
+                "lengths": lengths,
+                "counts": counts,
+            }
+
             return Response(us_data, status=status.HTTP_200_OK)
 
         except ValueError as ve:
@@ -47,6 +57,16 @@ class StateDataView(APIView):
 
             # Ensure state name exists in the data, and it's case-insensitive
             state_data = all_states_data.get(state_name)
+
+            prefix_distribution = state_data["charts"]["prefixLengthDistribution"]
+
+            lengths = [item["length"] for item in prefix_distribution]
+            counts = [item["count"] for item in prefix_distribution]
+
+            state_data["charts"]["prefixLengthDistribution"] = {
+                "lengths": lengths,
+                "counts": counts,
+            }
 
             if state_data:
                 return Response(state_data, status=status.HTTP_200_OK)

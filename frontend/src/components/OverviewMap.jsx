@@ -128,13 +128,13 @@ const OverviewMap = (props) => {
                     }
                 />
                 <button
-                    className="absolute bottom-5 left-5 z-50 cursor-pointer"
+                    className="absolute bottom-5 left-5 z-50 cursor-pointer rounded-2xl"
                     onClick={() => {
                         resetMap();
                     }}
                 >
-                    <h3 className="float-left font-bold text-lg text-black rounded-lg">
-                        Home
+                    <h3 className="float-left font-bold text-lg text-black">
+                        Recenter
                     </h3>
                 </button>
             </div>
