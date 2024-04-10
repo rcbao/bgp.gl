@@ -155,7 +155,7 @@ const StateMap = ({ data, stateName, radius = 2000, coverage = 1 }) => {
                     }}
                 >
                     <h3 className="float-left font-bold text-black rounded-lg">
-                        Home
+                        Recenter Map
                     </h3>
                 </button>
             </div>

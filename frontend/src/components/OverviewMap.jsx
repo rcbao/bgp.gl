@@ -134,7 +134,7 @@ const OverviewMap = (props) => {
                     }}
                 >
                     <h3 className="float-left font-bold text-lg text-black rounded-lg">
-                        Home
+                        Recenter Map
                     </h3>
                 </button>
             </div>
