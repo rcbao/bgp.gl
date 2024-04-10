@@ -17,11 +17,21 @@ const PrefixDistributionChart = (props) => {
             },
             xaxis: {
                 categories: props.data["lengths"],
+                tickAmount: 8,
+                labels: {
+                    style: {
+                        fontSize: "14px",
+                    },
+                },
             },
             yaxis: {
+                tickAmount: 3,
                 labels: {
                     formatter: function (val) {
                         return val.toExponential(1);
+                    },
+                    style: {
+                        fontSize: "16px",
                     },
                 },
             },
