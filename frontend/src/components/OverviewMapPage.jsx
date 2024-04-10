@@ -89,6 +89,7 @@ const OverviewMapPage = () => {
                                 </h3>
                             </div>
                             <PrefixDistributionChart
+                                regionName="the United States"
                                 data={data["prefixLengthDistribution"]}
                             />
                         </div>

@@ -44,7 +44,7 @@ const PrefixDistributionChart = (props) => {
     return (
         <div className="col-span-2 my-2">
             <h2 className="text-xl font-bold my-4">
-                Prefix Lengths Distribution in the United States
+                Prefix Lengths Distribution in {props.regionName}
             </h2>
             <Chart
                 options={state.options}

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import "maplibre-gl/dist/maplibre-gl.css";
 import StateMap from "./StateMap";
 import { findStateByAbbreviation } from "./utils/utils";
+import PrefixDistributionChart from "./PrefixDistroChart";
 
 const StateMapPage = () => {
     const { state: stateAbbr } = useParams();
@@ -102,6 +103,12 @@ const StateMapPage = () => {
                                     {maxLength}
                                 </h3>
                             </div>
+                            <PrefixDistributionChart
+                                regionName={stateName}
+                                data={
+                                    data["charts"]["prefixLengthDistribution"]
+                                }
+                            />
                         </div>
                     </div>
                 </div>
