@@ -16,16 +16,30 @@ const PrefixDistributionChart = (props) => {
                 size: 0,
             },
             xaxis: {
+                title: {
+                    text: "IP Prefix Lengths",
+                    offsetY: -12,
+                    style: {
+                        fontSize: "18px",
+                    },
+                },
                 categories: props.data["lengths"],
                 tickAmount: 8,
                 labels: {
                     style: {
-                        fontSize: "14px",
+                        fontSize: "16px",
                     },
+                    rotate: 0,
                 },
             },
             yaxis: {
                 tickAmount: 3,
+                title: {
+                    text: "# Occurances",
+                    style: {
+                        fontSize: "18px",
+                    },
+                },
                 labels: {
                     formatter: function (val) {
                         return val.toExponential(1);
