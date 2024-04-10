@@ -15,7 +15,7 @@ const getColorFromAnnouncements = (announcements) => {
     if (announcements < 5000) {
         return [221, 221, 221, 200]; // Basically grey
     } else if (announcements < 10000) {
-        return [204, 229, 255, 200]; // Very light blue
+        return [180, 229, 255, 190]; // Very light blue
     } else if (announcements < 25000) {
         return [153, 204, 255, 200]; // Light blue
     } else if (announcements < 50000) {
