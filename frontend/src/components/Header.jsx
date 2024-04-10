@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Header() {
     return (
         <Link
-            className="absolute top-5 left-5 z-50 cursor-pointer rounded-lg bg-gray-50"
+            className="absolute top-5 left-5 z-50 cursor-pointer rounded-lg bg-gray-200"
             to={`/`}
             style={{ textDecoration: "none" }}
         >

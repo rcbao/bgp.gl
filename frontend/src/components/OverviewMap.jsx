@@ -109,7 +109,9 @@ const OverviewMap = (props) => {
             onClick: ({ object, x, y }) => {
                 if (object) {
                     const stateAbbr = object.properties.abbreviation;
-                    navigate(`/${stateAbbr}`);
+                    if (stateAbbr !== "pr") {
+                        navigate(`/${stateAbbr}`);
+                    }
                 }
             },
         }),
