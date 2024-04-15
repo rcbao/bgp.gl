@@ -55,10 +55,20 @@ const StateMapPage = () => {
         if (!result1 && !result2) {
             return null;
         } else if (result1 && result2) {
-            return `The regions with the most BGP announcements are ${result1}, and ${result2}.`;
+            return (
+                <p className="col-span-2">
+                    The regions with the most BGP announcements are {result1},
+                    and {result2}.
+                </p>
+            );
         } else {
             const result = result1 ? result1 : result2;
-            return `The region in ${stateName} with the most BGP announcements is ${result}.`;
+            return (
+                <p className="col-span-2 my-3">
+                    The region in {stateName} with the most BGP announcements is{" "}
+                    {result}.
+                </p>
+            );
         }
     };
 
@@ -129,12 +139,11 @@ const StateMapPage = () => {
                                     {maxLength}
                                 </h3>
                             </div>
-                            <p className="col-span-2">
-                                {displayLocationStats(
-                                    data["overview"]["prefixStats"],
-                                    stateName
-                                )}
-                            </p>
+
+                            {displayLocationStats(
+                                data["overview"]["prefixStats"],
+                                stateName
+                            )}
                             <PrefixDistributionChart
                                 regionName={stateName}
                                 data={
