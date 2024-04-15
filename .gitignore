@@ -155,3 +155,4 @@ rib.*
 .DS_Store
 data_infra/data/out.json
 data_infra/data/ip_database/geolite2-city-ipv4-num.csv
+data_infra/src/us.json

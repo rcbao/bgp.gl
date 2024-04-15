@@ -1,4 +1,5 @@
 import json
+import heapq
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -38,6 +39,26 @@ class USDataView(APIView):
                 "counts": counts,
             }
 
+            heap_map = us_data["usAnnouncementHeatMap"]
+
+            state_most_bgp = max(heap_map, key=heap_map.get)
+
+            filtered_dict = {
+                key: value for key, value in heap_map.items() if key != "Puerto Rico"
+            }
+            state_least_bgp = min(filtered_dict, key=filtered_dict.get)
+
+            us_data["overview"]["stateStats"] = {
+                "stateMostAnnouncements": {
+                    "name": state_most_bgp,
+                    "count": heap_map[state_most_bgp],
+                },
+                "stateLeastAnnouncements": {
+                    "name": state_least_bgp,
+                    "count": heap_map[state_least_bgp],
+                },
+            }
+
             return Response(us_data, status=status.HTTP_200_OK)
 
         except ValueError as ve:
@@ -53,20 +74,10 @@ class StateDataView(APIView):
 
     def get(self, request, state_name, *args, **kwargs):
         try:
-            all_states_data = load_json("api/data/state-output.json")
+            all_states_data = load_json("api/data/state-output-v2.json")
 
             # Ensure state name exists in the data, and it's case-insensitive
             state_data = all_states_data.get(state_name)
-
-            prefix_distribution = state_data["charts"]["prefixLengthDistribution"]
-
-            lengths = [item["length"] for item in prefix_distribution]
-            counts = [item["count"] for item in prefix_distribution]
-
-            state_data["charts"]["prefixLengthDistribution"] = {
-                "lengths": lengths,
-                "counts": counts,
-            }
 
             if state_data:
                 return Response(state_data, status=status.HTTP_200_OK)

@@ -11,7 +11,7 @@ const OverviewMapPage = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://127.0.0.1:8000/us-overview/`, {
+            const response = await fetch(`http://127.0.0.1:8000/us/`, {
                 // posts the form to users/me/items. You need to login to be able to send this
                 method: "GET",
                 headers: {
@@ -31,6 +31,18 @@ const OverviewMapPage = () => {
         fetchData();
     }, [navigate]);
 
+    const displayStateStats = (data) => {
+        const maxEl = data["overview"]["stateStats"]["stateMostAnnouncements"];
+        const maxName = maxEl["name"];
+        const maxCount = maxEl["count"];
+        const minEl = data["overview"]["stateStats"]["stateLeastAnnouncements"];
+        const minName = minEl["name"];
+        const minCount = minEl["count"];
+
+        const res = `Among all states, ${maxName} has the most BGP announcements (${maxCount}), while ${minName} has the fewest (${minCount}).`;
+        return res;
+    };
+
     if (!(data && data["overview"] && data["prefixLengthDistribution"])) {
         return null;
     }
@@ -39,11 +51,11 @@ const OverviewMapPage = () => {
         data && (
             <div className="columns-2 flex flex-row">
                 <OverviewMap navigate={navigate} data={data} />
-                <div style={{ width: "40vw" }} className="p-10">
+                <div style={{ width: "40vw" }} className="p-6">
                     <h1 className="text-3xl font-bold">
                         United States BGP Traffic Map
                     </h1>
-                    <div className="my-6">
+                    <div className="my-3">
                         <h2 className="text-xl font-bold my-4">
                             High-level Overview
                         </h2>
@@ -88,6 +100,9 @@ const OverviewMapPage = () => {
                                     {data["overview"]["mostCommonPrefixLength"]}
                                 </h3>
                             </div>
+                            <p className="col-span-2">
+                                {displayStateStats(data)}
+                            </p>
                             <PrefixDistributionChart
                                 regionName="the United States"
                                 data={data["prefixLengthDistribution"]}

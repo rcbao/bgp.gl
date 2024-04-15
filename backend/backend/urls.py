@@ -22,6 +22,6 @@ from api.views import USDataView, StateDataView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
-    path("us-overview/", USDataView.as_view(), name="us-overview"),
-    path("state-data/<str:state_name>/", StateDataView.as_view(), name="state-data"),
+    path("us/", USDataView.as_view(), name="us"),
+    path("state/<str:state_name>/", StateDataView.as_view(), name="state-data"),
 ]
