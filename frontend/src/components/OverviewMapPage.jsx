@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import "maplibre-gl/dist/maplibre-gl.css";
 import OverviewMap from "./OverviewMap";
 import PrefixDistributionChart from "./PrefixDistroChart";
+import { USE_WEB_SERVICE_RESULTS } from "./utils/constants";
+import overviewData from "../../../backend/api/data/us-output-v2.json";
 
 const OverviewMapPage = () => {
     const navigate = useNavigate();
 
-    const [data, setData] = useState({});
+    const [data, setData] = useState(overviewData);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,8 +30,10 @@ const OverviewMapPage = () => {
             }
         };
 
-        fetchData();
-    }, [navigate]);
+        if (USE_WEB_SERVICE_RESULTS) {
+            fetchData();
+        }
+    }, [navigate, USE_WEB_SERVICE_RESULTS]);
 
     const displayStateStats = (data) => {
         const maxEl = data["overview"]["stateStats"]["stateMostAnnouncements"];
@@ -59,7 +63,7 @@ const OverviewMapPage = () => {
                         <h2 className="text-xl font-bold my-4">
                             High-level Overview
                         </h2>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-2 gap-3">
                             <div className="dashboard-widget-card ">
                                 <h5 className="dashboard-widget-card-header">
                                     # BGP Announcements
@@ -100,7 +104,7 @@ const OverviewMapPage = () => {
                                     {data["overview"]["mostCommonPrefixLength"]}
                                 </h3>
                             </div>
-                            <p className="col-span-2">
+                            <p className="col-span-2 my-3">
                                 {displayStateStats(data)}
                             </p>
                             <PrefixDistributionChart

@@ -4,14 +4,18 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import StateMap from "./StateMap";
 import { findStateByAbbreviation } from "./utils/utils";
 import PrefixDistributionChart from "./PrefixDistroChart";
+import { USE_WEB_SERVICE_RESULTS } from "./utils/constants";
+import stateData from "../../../backend/api/data/state-output-v2.json";
 
 const StateMapPage = () => {
     const { state: stateAbbr } = useParams();
     const stateName = findStateByAbbreviation(stateAbbr).properties.name;
 
     const navigate = useNavigate();
-    const [data, setData] = useState({});
-    const [mapData, setMapData] = useState({});
+    const [data, setData] = useState(stateData[stateName]);
+    const [mapData, setMapData] = useState(
+        stateData[stateName]["charts"]["stateAnnouncementHeatMap"]
+    );
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,8 +37,10 @@ const StateMapPage = () => {
             }
         };
 
-        fetchData();
-    }, [navigate]);
+        if (USE_WEB_SERVICE_RESULTS) {
+            fetchData();
+        }
+    }, [navigate, USE_WEB_SERVICE_RESULTS]);
 
     const displayLocationStat = (location) => {
         if (location["city"] === "Unknown") {

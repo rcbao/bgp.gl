@@ -27,37 +27,7 @@ class USDataView(APIView):
     def get(self, request, *args, **kwargs):
         try:
             # Build the initial prompt using OpeningPromptBuilder
-            us_data = load_json("api/data/us-output.json")
-
-            prefix_distribution = us_data["prefixLengthDistribution"]
-
-            lengths = [item["length"] for item in prefix_distribution]
-            counts = [item["count"] for item in prefix_distribution]
-
-            us_data["prefixLengthDistribution"] = {
-                "lengths": lengths,
-                "counts": counts,
-            }
-
-            heap_map = us_data["usAnnouncementHeatMap"]
-
-            state_most_bgp = max(heap_map, key=heap_map.get)
-
-            filtered_dict = {
-                key: value for key, value in heap_map.items() if key != "Puerto Rico"
-            }
-            state_least_bgp = min(filtered_dict, key=filtered_dict.get)
-
-            us_data["overview"]["stateStats"] = {
-                "stateMostAnnouncements": {
-                    "name": state_most_bgp,
-                    "count": heap_map[state_most_bgp],
-                },
-                "stateLeastAnnouncements": {
-                    "name": state_least_bgp,
-                    "count": heap_map[state_least_bgp],
-                },
-            }
+            us_data = load_json("api/data/us-output-v2.json")
 
             return Response(us_data, status=status.HTTP_200_OK)
 
