@@ -69,7 +69,11 @@ const OverviewMapPage = () => {
                                     # BGP Announcements
                                 </h5>
                                 <h3 className="dashboard-widget-card-data">
-                                    {data["overview"]["numberOfAnnouncements"]}
+                                    {
+                                        data["overview"][
+                                            "numberOfAnnouncements"
+                                        ]
+                                    }
                                 </h3>
                             </div>
                             <div className="dashboard-widget-card">
@@ -101,7 +105,11 @@ const OverviewMapPage = () => {
                                     Most Advertised Prefix Length
                                 </h5>
                                 <h3 className="dashboard-widget-card-data">
-                                    {data["overview"]["mostCommonPrefixLength"]}
+                                    {
+                                        data["overview"][
+                                            "mostCommonPrefixLength"
+                                        ]
+                                    }
                                 </h3>
                             </div>
                             <p className="col-span-2 my-3">

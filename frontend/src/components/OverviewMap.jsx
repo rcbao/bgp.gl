@@ -11,23 +11,45 @@ export const overviewViewState = {
     maxZoom: 10,
 };
 
+// Blue Gradient
+// const getColorFromAnnouncements = (announcements) => {
+//     if (announcements < 5000) {
+//         return [221, 221, 221, 200]; // Basically grey
+//     } else if (announcements < 10000) {
+//         return [180, 229, 255, 190]; // Very light blue
+//     } else if (announcements < 25000) {
+//         return [153, 204, 255, 200]; // Light blue
+//     } else if (announcements < 50000) {
+//         return [102, 178, 255, 200]; // Medium light blue
+//     } else if (announcements < 100000) {
+//         return [51, 153, 255, 200]; // Medium dark blue
+//     } else if (announcements < 250000) {
+//         return [0, 128, 255, 200]; // Dark blue
+//     } else if (announcements < 400000) {
+//         return [0, 102, 204, 200]; // Darker blue
+//     } else {
+//         return [0, 51, 153, 200]; // Darkest blue, for announcements >= 400000
+//     }
+// };
+
+// Red Gradient
 const getColorFromAnnouncements = (announcements) => {
     if (announcements < 5000) {
-        return [221, 221, 221, 200]; // Basically grey
+        return [255, 240,240, 200]; // Basically grey
     } else if (announcements < 10000) {
-        return [180, 229, 255, 190]; // Very light blue
+        return [255, 200, 200, 190]; //
     } else if (announcements < 25000) {
-        return [153, 204, 255, 200]; // Light blue
+        return [255, 160, 160, 200]; //
     } else if (announcements < 50000) {
-        return [102, 178, 255, 200]; // Medium light blue
+        return [255, 120, 120, 200]; //
     } else if (announcements < 100000) {
-        return [51, 153, 255, 200]; // Medium dark blue
+        return [255, 80, 80, 200]; //
     } else if (announcements < 250000) {
-        return [0, 128, 255, 200]; // Dark blue
+        return [200, 50, 50, 200]; //
     } else if (announcements < 400000) {
-        return [0, 102, 204, 200]; // Darker blue
+        return [150, 0, 0, 200]; //
     } else {
-        return [0, 51, 153, 200]; // Darkest blue, for announcements >= 400000
+        return [100, 0, 0, 200]; //
     }
 };
 
