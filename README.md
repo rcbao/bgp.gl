@@ -31,13 +31,13 @@ python manage.py runserver  # once everything has been set up, start the django 
 If you recieve a warning about unapplied migrations, run;
 `python manage.py makemigrations` and `python manage.py migrate`
 
-## More Screeshots
+## Additional Screeshots
 
 The dashboard provides a hexagon-based heatmap for each state's BGP pattern, as well as more detailed traffic metrics. Below are additional app screenshots, specifically maps for the states of California and Florida.
 
-<p float="left">
-  <img src="https://github.com/robertchenbao/us-bgp-dashboard/assets/30555057/6bd4e443-4ef5-49fa-aa65-e53aec5d7d4b" width="500" />
-  <img src="https://github.com/robertchenbao/us-bgp-dashboard/assets/30555057/9870c56b-47e9-4811-8b7c-8b6bc640d875" width="500" />
+<p align="center">
+  <img src="https://github.com/robertchenbao/us-bgp-dashboard/assets/30555057/6bd4e443-4ef5-49fa-aa65-e53aec5d7d4b" style="width: 48%" />
+  <img src="https://github.com/robertchenbao/us-bgp-dashboard/assets/30555057/9870c56b-47e9-4811-8b7c-8b6bc640d875" style="width: 48%" />
 </p>
 
 ## License
